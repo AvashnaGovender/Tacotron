@@ -1,14 +1,14 @@
 
 # CONFIG -----------------------------------------------------------------------------------------------------------#
-
+ROOT = '/exports/csce/eddie/inf/groups/eddie_inf_hcrc_cstr_general/avashna/Samsung/'
 # Here are the input and output data paths (Note: you can override wav_path in preprocess.py)
-wav_path = '/path/to/wav_files/'
-data_path = 'data/'
+wav_path = ROOT+'data/wavs_train/CB_JE'
+data_path = ROOT+'data/'
 
 # model ids are separate - that way you can use a new tts with an old wavernn and vice versa
 # NB: expect undefined behaviour if models were trained on different DSP settings
-voc_model_id = 'ljspeech_mol'
-tts_model_id = 'ljspeech_lsa_smooth_attention'
+voc_model_id = 'blizzard_vocoder'
+tts_model_id = 'blizzard_baseline_JE'
 
 # set this to True if you are only interested in WaveRNN
 ignore_tts = False
@@ -17,7 +17,7 @@ ignore_tts = False
 # DSP --------------------------------------------------------------------------------------------------------------#
 
 # Settings for all models
-sample_rate = 22050
+sample_rate = 16000
 n_fft = 2048
 fft_bins = n_fft // 2 + 1
 num_mels = 80
@@ -73,7 +73,7 @@ tts_lstm_dims = 512
 tts_postnet_K = 8
 tts_num_highways = 4
 tts_dropout = 0.5
-tts_cleaner_names = ['english_cleaners']
+tts_cleaner_names = ['blizz_cleaners']
 tts_stop_threshold = -3.4           # Value below which audio generation ends.
                                     # For example, for a range of [-4, 4], this
                                     # will terminate the sequence at the first
@@ -94,4 +94,3 @@ tts_checkpoint_every = 2_000        # checkpoints the model every X steps
 
 
 # ------------------------------------------------------------------------------------------------------------------#
-

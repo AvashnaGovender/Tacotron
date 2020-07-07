@@ -6,7 +6,7 @@ from multiprocessing import Pool, cpu_count
 from utils.paths import Paths
 import pickle
 import argparse
-from utils.text.recipes import ljspeech
+from utils.text.recipes import blizzard
 from utils.files import get_files
 from pathlib import Path
 
@@ -69,7 +69,7 @@ else:
 
     if not hp.ignore_tts:
 
-        text_dict = ljspeech(path)
+        text_dict = blizzard(path)
 
         with open(paths.data/'text_dict.pkl', 'wb') as f:
             pickle.dump(text_dict, f)

@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-## Project: SCRIPT - May 2018
-## Contact: Oliver Watts - owatts@staffmail.ed.ac.uk
 
 
 import re

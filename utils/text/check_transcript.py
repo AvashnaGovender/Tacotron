@@ -19,9 +19,6 @@ from libutil import readlist, writelist, basename
 
 from bashplotlib.histogram import plot_hist
 
-
-
-
 def main_work():
 
 
@@ -104,63 +101,63 @@ def main_work():
 
 
 
-    print
-    print '%s of %s sentences processed successfully -- to debug rerun ....'%(len(outlines), len(texts))
-    print
+    print()
+    print ('%s of %s sentences processed successfully -- to debug rerun ....'%(len(outlines), len(texts)))
+    print()
 
-    print 'missing audio for :'
-    print missing_audio
-    print
-    print
-    print 'Keep %s of %s letter/phone tokens'%(len(letter_lengths), len(all_letter_lengths))
-    print 'Keep %s of %s frames'%(len(frame_lengths), len(all_frame_lengths))
-    print
+    print( 'missing audio for :')
+    print(missing_audio)
+    print()
+    print()
+    print ('Keep %s of %s letter/phone tokens'%(len(letter_lengths), len(all_letter_lengths)))
+    print ('Keep %s of %s frames'%(len(frame_lengths), len(all_frame_lengths)))
+    print()
 
     if opts.phone:
-        print '------------------'
-        print 'Observed phones:'
-        print '------------------'
-        print
-        print sorted([str(k) for k in letter_inventory.keys()])
-        print '------------------'
+        print ('------------------')
+        print ('Observed phones:')
+        print ('------------------')
+        print()
+        print(sorted([str(k) for k in letter_inventory.keys()]))
+        print('------------------')
 
         junctures = [p for p in letter_inventory.keys() if p.startswith(u'<') and p.endswith(u'>')]
 
 
         junctures = [p.strip('|') for p in junctures]
         junctures = [j for j in junctures if j != '']
-        print
-        print
-        print 'Junctures (many of these may be spurious):'
-        print
-        print ' '.join(sorted(junctures))
-        print
+        print()
+        print()
+        print ('Junctures (many of these may be spurious):')
+        print()
+        print (' '.join(sorted(junctures)))
+        print()
 
     else:
-        print '------------------'
-        print 'Observed letters:'
-        print '------------------'
-        print
-        print [''.join(sorted(letter_inventory.keys()))]
-        print '------------------'
-    print
-    print 'Letter/phone length max:'
-    print max(letter_lengths)
+        print ('------------------')
+        print ('Observed letters:')
+        print ('------------------')
+        print()
+        print ([''.join(sorted(letter_inventory.keys()))])
+        print ('------------------')
+    print()
+    print ('Letter/phone length max:')
+    print (max(letter_lengths))
 
     if opts.speaker:
-        print '------------------'
-        print 'Observed speakers:'
-        print '------------------'
-        print
-        print sorted(speaker_ids.keys())
-        print '------------------'
+        print ('------------------')
+        print ('Observed speakers:')
+        print ('------------------')
+        print()
+        print (sorted(speaker_ids.keys()))
+        print ('------------------')
 
 
 
     if opts.cmpdir:
-        print 'Frame length max:'
-        print max(frame_lengths)
-    
+        print ('Frame length max:')
+        print (max(frame_lengths))
+
 
     plot_hist(letter_lengths, xlab=True, bincount=30, title='Histogram of sentence length in letters', height=10, colour='k')
 
@@ -169,8 +166,8 @@ def main_work():
 
 
 
-    print
-    print 'Run again with -maxframes and -maxletters to exclude the tail...'
+    print()
+    print ('Run again with -maxframes and -maxletters to exclude the tail...')
 
 
     if opts.outfile:

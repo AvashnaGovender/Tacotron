@@ -8,7 +8,7 @@ def blizzard(path: Union[str, Path]):
 
     text_dict = {}
 
-    with open(csv_file, encoding='utf-8') as f  :
+    with open(csv_file[0], encoding='utf-8') as f  :
         content =  f.readlines()
 
     for line in content :

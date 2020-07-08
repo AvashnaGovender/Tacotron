@@ -46,7 +46,6 @@ def main_work():
         assert len(line) == len(texts[0]), line
 
 
-    texts = [line.split(" ") for line in texts]
     all_frame_lengths = []
     all_letter_lengths = []
 
@@ -62,7 +61,7 @@ def main_work():
         base, normtext = text[:2]
         if opts.phone:
             assert len(text) >= 3
-            symbols = text[2]
+            symbols = text[-1]
             symbols = re.split('\s+', symbols)
         else:
             symbols = list(normtext.lower())

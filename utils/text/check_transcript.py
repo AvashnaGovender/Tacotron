@@ -11,7 +11,6 @@ import codecs
 from argparse import ArgumentParser
 from tqdm import tqdm
 
-from libutil import readlist, writelist, basename
 
 from bashplotlib.histogram import plot_hist
 

@@ -46,7 +46,7 @@ def main_work():
         assert len(line) == len(texts[0]), line
 
 
-
+    texts = [line.split(" ") for line in texts]
     all_frame_lengths = []
     all_letter_lengths = []
 

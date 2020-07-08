@@ -12,7 +12,7 @@ from argparse import ArgumentParser
 from tqdm import tqdm
 
 
-from bashplotlib.histogram import plot_hist
+    from bashplotlib.histogram import plot_hist
 
 def main_work():
 
@@ -40,7 +40,10 @@ def main_work():
     texts = [t for t in texts if t != '']
     texts = [line.strip().split("<>") for line in texts]
 
+
     for line in texts:
+        print("text", texts[0])
+        print(line)
         assert len(line) == len(texts[0]), line
 
 

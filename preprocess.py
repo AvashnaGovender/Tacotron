@@ -11,17 +11,9 @@ from utils.files import get_files
 from pathlib import Path
 
 
-# Helper functions for argument types
-def valid_n_workers(num):
-    n = int(num)
-    if n < 1:
-        raise argparse.ArgumentTypeError('%r must be an integer greater than 0' % num)
-    return n
-
 parser = argparse.ArgumentParser(description='Preprocessing for WaveRNN and Tacotron')
 parser.add_argument('--path', '-p', help='directly point to dataset path (overrides hparams.wav_path')
 parser.add_argument('--extension', '-e', metavar='EXT', default='.wav', help='file extension to search for in dataset folder')
-parser.add_argument('--num_workers', '-w', metavar='N', type=valid_n_workers, default=cpu_count()-1, help='The number of worker threads to use for preprocessing')
 parser.add_argument('--hp_file', metavar='FILE', default='hparams.py', help='The file to use for the hyperparameters')
 args = parser.parse_args()
 
@@ -84,7 +76,7 @@ else:
         ('CPU Usage', f'{n_workers}/{cpu_count()}')
     ])
 
-    pool = Pool(processes=n_workers)
+    pool = Pool(processes=cpu_count())
     dataset = []
 
     for i, (item_id, length) in enumerate(pool.imap_unordered(process_wav, wav_files), 1):

@@ -66,14 +66,14 @@ else:
         with open(paths.data/'text_dict.pkl', 'wb') as f:
             pickle.dump(text_dict, f)
 
-    n_workers = max(1, args.num_workers)
+
 
     simple_table([
         ('Sample Rate', hp.sample_rate),
         ('Bit Depth', hp.bits),
         ('Mu Law', hp.mu_law),
         ('Hop Length', hp.hop_length),
-        ('CPU Usage', f'{n_workers}/{cpu_count()}')
+        ('CPU Usage', f'{cpu_count()}')
     ])
 
     pool = Pool(processes=cpu_count())

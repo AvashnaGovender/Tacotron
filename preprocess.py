@@ -40,7 +40,7 @@ def convert_file(path: Path):
 
 
 def process_wav(path: Path):
-    wav_id = path.stem
+    wav_id = path.split("/")[-1]
     m, x = convert_file(path)
     np.save(paths.mel/f'{wav_id}.npy', m, allow_pickle=False)
     np.save(paths.quant/f'{wav_id}.npy', x, allow_pickle=False)

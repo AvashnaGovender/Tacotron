@@ -62,7 +62,7 @@ else:
 
     if not hp.ignore_tts:
 
-        text_dict = blizzard(path)
+        text_dict = blizzard(path, hp.book_names)
 
         with open(paths.data/'text_dict.pkl', 'wb') as f:
             pickle.dump(text_dict, f)

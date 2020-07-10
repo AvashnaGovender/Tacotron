@@ -26,6 +26,7 @@ extension = args.extension
 path = args.path
 
 def convert_file(path: Path):
+    path = path+".wav"
     y = load_wav(path)
     peak = np.abs(y).max()
     if hp.peak_norm or peak > 1.0:

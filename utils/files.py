@@ -1,6 +1,17 @@
-from pathlib import Path
-from typing import Union
 
-def get_files(path: Union[str, Path], extension='.wav'):
-    if isinstance(path, str): path = Path(path).expanduser().resolve()
-    return list(path.rglob(f'*{extension}'))
+def get_files(path, extension='.csv', books):
+    filenames = []
+    filepath = os.path.join(path,"train.csv")
+    with open(filepath, "r") as f:
+        content = f.readlines()
+
+    content  = [x.strip() for x in content ]
+
+    for x in content:
+        name  = x.split("|")[0]
+        book = name.split("-")[:2]
+
+        if book in books:
+            name = os.path.join(path, name[:5], name)
+            filenames += [name]
+    return filenames

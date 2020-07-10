@@ -24,7 +24,6 @@ if args.path is None:
 
 extension = args.extension
 path = args.path
-books = hp.book_names
 
 def convert_file(path: Path):
     y = load_wav(path)
@@ -48,7 +47,7 @@ def process_wav(path: Path):
     return wav_id, m.shape[-1]
 
 
-wav_files = get_files(path, books, extension)
+wav_files = get_files(path, hp.book_names, extension)
 paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
 
 print(f'\n{len(wav_files)} {extension[1:]} files found in "{path}"\n')

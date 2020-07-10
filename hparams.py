@@ -2,8 +2,8 @@
 # CONFIG -----------------------------------------------------------------------------------------------------------#
 ROOT = '/exports/csce/eddie/inf/groups/eddie_inf_hcrc_cstr_general/avashna/Samsung/'
 # Here are the input and output data paths (Note: you can override wav_path in preprocess.py)
-wav_path = ROOT+'data/wavs_train/CB-JE'
-data_path = ROOT+'data/'
+wav_path = ROOT+'data/wavs_train/'
+data_path = ROOT+'data/data/CB_JE'
 book_names = ['CB-JE']
 # model ids are separate - that way you can use a new tts with an old wavernn and vice versa
 # NB: expect undefined behaviour if models were trained on different DSP settings

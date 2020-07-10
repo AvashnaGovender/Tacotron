@@ -47,7 +47,7 @@ def process_wav(path: Path):
     return wav_id, m.shape[-1]
 
 
-wav_files = get_files(path, extension, book_names)
+wav_files = get_files(path, book_names, extension)
 paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
 
 print(f'\n{len(wav_files)} {extension[1:]} files found in "{path}"\n')

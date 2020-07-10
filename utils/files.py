@@ -1,5 +1,5 @@
 
-def get_files(path, extension='.csv', books):
+def get_files(path, books, extension='.csv'):
     filenames = []
     filepath = os.path.join(path,"train.csv")
     with open(filepath, "r") as f:

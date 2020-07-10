@@ -17,13 +17,14 @@ parser.add_argument('--extension', '-e', metavar='EXT', default='.wav', help='fi
 parser.add_argument('--hp_file', metavar='FILE', default='hparams.py', help='The file to use for the hyperparameters')
 args = parser.parse_args()
 
+print(args.hp_file)
 hp.configure(args.hp_file)  # Load hparams from file
 if args.path is None:
     args.path = hp.wav_path
 
 extension = args.extension
 path = args.path
-book_names = hp.book_names
+books = hp.book_names
 
 def convert_file(path: Path):
     y = load_wav(path)
@@ -47,7 +48,7 @@ def process_wav(path: Path):
     return wav_id, m.shape[-1]
 
 
-wav_files = get_files(path, book_names, extension)
+wav_files = get_files(path, books, extension)
 paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
 
 print(f'\n{len(wav_files)} {extension[1:]} files found in "{path}"\n')

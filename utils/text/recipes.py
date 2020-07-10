@@ -1,6 +1,7 @@
 from utils.files import get_files
 from pathlib import Path
 from typing import Union
+import os
 
 def blizzard(path: Union[str, Path], books):
     filepath = os.path.join(path,"train.csv")

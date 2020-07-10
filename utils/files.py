@@ -15,6 +15,6 @@ def get_files(path, books, extension='.csv'):
         bookname = book[0]+"-"+book[1]
 
         if bookname in books:
-            name = os.path.join(path, name[:5], name+'.wav')
+            name = os.path.join(path, name[:5], name)
             filenames += [name]
     return filenames

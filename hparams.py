@@ -17,12 +17,12 @@ ignore_tts = False
 # DSP --------------------------------------------------------------------------------------------------------------#
 
 # Settings for all models
-sample_rate = 16000
+sample_rate = 22050
 n_fft = 2048
 fft_bins = n_fft // 2 + 1
 num_mels = 80
 hop_length = 275                    # 12.5ms - in line with Tacotron 2 paper
-win_length = 1100                   # 50ms - same reason as above
+win_length = 1102                   # 50ms - same reason as above
 fmin = 40
 min_level_db = -100
 ref_level_db = 20

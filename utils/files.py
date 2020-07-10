@@ -11,10 +11,10 @@ def get_files(path, books, extension='.csv'):
 
     for x in content:
         name  = x.split("|")[0]
-        book = name.split("-")[:2]
+        book = name.split("-")
+        bookname = book[0]+"-"+book[1]
 
-        if book in books:
+        if bookname in books:
             name = os.path.join(path, name[:5], name)
-            print(name)
             filenames += [name]
     return filenames

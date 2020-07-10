@@ -15,5 +15,6 @@ def get_files(path, books, extension='.csv'):
 
         if book in books:
             name = os.path.join(path, name[:5], name)
+            print(name)
             filenames += [name]
     return filenames

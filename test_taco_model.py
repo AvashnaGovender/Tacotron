@@ -9,11 +9,11 @@ from utils.display import save_attention, simple_table
 import zipfile, os
 
 
-os.makedirs('quick_start/voc_weights/', exist_ok=True)
+#os.makedirs('quick_start/voc_weights/', exist_ok=True)
 
-zip_ref = zipfile.ZipFile('pretrained/ljspeech.wavernn.mol.800k.zip', 'r')
-zip_ref.extractall('quick_start/voc_weights/')
-zip_ref.close()
+#zip_ref = zipfile.ZipFile('pretrained/ljspeech.wavernn.mol.800k.zip', 'r')
+#zip_ref.extractall('quick_start/voc_weights/')
+#zip_ref.close()
 
 if __name__ == "__main__":
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                          stop_threshold=hp.tts_stop_threshold).to(device)
 
 
-    tts_model.load('checkpoints/blizzard_baseline_JE.tacotron/taco_step184K_weights.pyt')
+    tts_model.load('checkpoints/blizzard_baseline_JE.tacotron/latest_weights.pyt')
 
     if input_text:
         inputs = [text_to_sequence(input_text.strip(), hp.tts_cleaner_names)]

@@ -90,6 +90,15 @@ def english_cleaners(text):
   return text
 
 
+def voxygen_cleaners(text):
+    #print("Voxy cleaner")
+    #text = collapse_whitespace(text)
+    text = text.replace(' ','')
+    text = text.replace('|',' ')
+    #print(text)
+    return text
+
 def blizz_cleaners(text):
-    text = collapse_whitespace(text)
+    text = text.replace(' ','')
+    text = text.replace('<>',' ')
     return text

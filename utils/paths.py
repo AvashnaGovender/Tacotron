@@ -31,7 +31,7 @@ class Paths:
         self.tts_attention = self.tts_checkpoints/'attention'
         self.tts_mel_plot = self.tts_checkpoints/'mel_plots'
 
-        self.create_paths()
+        #self.create_paths()
 
     def create_paths(self):
         os.makedirs(self.data, exist_ok=True)
@@ -60,5 +60,3 @@ class Paths:
     def get_voc_named_optim(self, name):
         """Gets the path for the optimizer state in a named voc checkpoint."""
         return self.voc_checkpoints/f'{name}_optim.pyt'
-
-

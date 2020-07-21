@@ -99,4 +99,5 @@ def voxygen_cleaners(text):
     return text
 
 def blizz_cleaners(text):
+    text = collapse_whitespace(text)
     return text

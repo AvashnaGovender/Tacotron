@@ -147,6 +147,7 @@ class TTSDataset(Dataset):
     def __getitem__(self, index):
         item_id = self.metadata[index]
         x = text_to_sequence(self.text_dict[item_id], hp.tts_cleaner_names)
+        print(x)
         mel = np.load(self.path/'mel'/f'{item_id}.npy')
         mel_len = mel.shape[-1]
         return x, mel, item_id, mel_len

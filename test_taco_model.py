@@ -77,7 +77,7 @@ if __name__ == "__main__":
                          stop_threshold=hp.tts_stop_threshold).to(device)
 
 
-    tts_model.load('checkpoints/blizzard_baseline_JE.tacotron/taco_step228K_weights.pyt')
+    tts_model.load('checkpoints/blizzard_baseline_JE.tacotron/taco_step300K_weights.pyt')
 
     if input_text:
         inputs = [text_to_sequence(input_text.strip(), hp.tts_cleaner_names)]

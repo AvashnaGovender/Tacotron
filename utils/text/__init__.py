@@ -33,7 +33,6 @@ def text_to_sequence(text, cleaner_names):
   for c in myseq:
       if c in symbols:
             sequence.append(symbols.index(c))
-
   return sequence
 
   # Check for curly braces and treat their contents as ARPAbet:

@@ -3,12 +3,12 @@
 ROOT = '/exports/csce/eddie/inf/groups/eddie_inf_hcrc_cstr_general/avashna/Samsung/'
 # Here are the input and output data paths (Note: you can override wav_path in preprocess.py)
 wav_path = ROOT+'data/wavs_train/'
-data_path = ROOT+'data/data/CB_JE'
-book_names = ['CB-JE']
+data_path = ROOT+'data/data/CB_JE_EM'
+book_names = ['CB-JE', 'CB-EM']
 # model ids are separate - that way you can use a new tts with an old wavernn and vice versa
 # NB: expect undefined behaviour if models were trained on different DSP settings
 voc_model_id = 'blizzard_vocoder'
-tts_model_id = 'blizzard_baseline_JE'
+tts_model_id = 'blizzard_baseline_JE_EM'
 
 # set this to True if you are only interested in WaveRNN
 ignore_tts = False

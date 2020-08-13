@@ -13,6 +13,10 @@ class Paths:
         self.mel = self.data/'mel'
         self.gta = self.data/'gta'
 
+        #Alignment_paths
+        self.labels = self.data/'labels'
+        self.voice = self.data/f'cmu_us_{tts_id}'
+
         # WaveRNN/Vocoder Paths
         self.voc_checkpoints = self.base/'checkpoints'/f'{voc_id}.wavernn'
         self.voc_latest_weights = self.voc_checkpoints/'latest_weights.pyt'
@@ -34,6 +38,7 @@ class Paths:
         self.create_paths()
 
     def create_paths(self):
+        print("Creating paths")
         os.makedirs(self.data, exist_ok=True)
         os.makedirs(self.quant, exist_ok=True)
         os.makedirs(self.mel, exist_ok=True)
@@ -44,6 +49,9 @@ class Paths:
         os.makedirs(self.tts_output, exist_ok=True)
         os.makedirs(self.tts_attention, exist_ok=True)
         os.makedirs(self.tts_mel_plot, exist_ok=True)
+        os.makedirs(self.tts_mel_plot, exist_ok=True)
+        os.makedirs(self.labels, exist_ok=True)
+        os.makedirs(self.voice, exist_ok=True)
 
     def get_tts_named_weights(self, name):
         """Gets the path for the weights in a named tts checkpoint."""

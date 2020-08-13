@@ -1,17 +1,28 @@
 
 # CONFIG -----------------------------------------------------------------------------------------------------------#
-ROOT = '/exports/csce/eddie/inf/groups/eddie_inf_hcrc_cstr_general/avashna/Samsung/'
+ROOT = '/Users/avashnagovender/Samsung_Project/Tacotron/'
 # Here are the input and output data paths (Note: you can override wav_path in preprocess.py)
 wav_path = ROOT+'data/wavs_train/'
-data_path = ROOT+'data/data/CB_JE_EM'
-book_names = ['CB-JE', 'CB-EM']
+txt_path = ROOT+'data/txt_train/'
+
+data_path = ROOT+'data/data/test'
+book_names = ['CB-JE']
 # model ids are separate - that way you can use a new tts with an old wavernn and vice versa
 # NB: expect undefined behaviour if models were trained on different DSP settings
 voc_model_id = 'blizzard_vocoder'
-tts_model_id = 'blizzard_baseline_JE_EM'
+tts_model_id = 'blizzard_baseline_test'
 
 # set this to True if you are only interested in WaveRNN
 ignore_tts = False
+
+#Paths for forced-alignment
+
+frontend = '/Users/avashnagovender/Development/merlin/misc/scripts/frontend'
+speech_tools = '/Users/avashnagovender/Development/speech_tools'
+fest = '/Users/avashnagovender/Development/festival'
+festvox = '/Users/avashnagovender/Development/festvox'
+
+
 
 
 # DSP --------------------------------------------------------------------------------------------------------------#

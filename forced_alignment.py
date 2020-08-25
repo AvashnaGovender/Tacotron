@@ -49,6 +49,10 @@ os.system(f'python scripts/genScmFile.py \
         {lab_dir}/file_id_list.scp')
 
 
+## create utts using FESTIVAL
+
+os.system(f'tools/festival/bin/festival -b {lab_dir}/train_sentences.scm')
+
 exit()
 
 # Check wav files and txt files are equal

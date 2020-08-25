@@ -22,6 +22,6 @@ if __name__ == "__main__":
         t = data[2]
         file_id = data[0]
 
-        out_f.write("( "+file_id+" \" "+text+" \")\n")
+        out_f.write("( "+file_id+" \" "+t+" \")\n")
 
     out_f.close()

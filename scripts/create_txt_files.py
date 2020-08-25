@@ -1,6 +1,6 @@
 import os
 import argparse
-
+import codecs
 
 # Helper script to create text files for forced alignment from
 # the metadata.csv transcription file
@@ -21,11 +21,21 @@ path = args.path
 with open(transcript, 'r') as f:
     content = f.readlines()
 
-
+#
 for line in content:
     txt = line.split('|')[2]
     filename = line.split('|')[0]
-    
+
     file1 = open(f'{path}/{filename}.txt', 'w')
     file1.write(txt)
     file1.close()
+
+# utts.data format
+
+# for line in content:
+#     txt = line.split('\"')[1]
+#     filename = line.split(' ')[1]
+#
+#     with codecs.open(f'{path}/{filename}.txt', 'w', "utf-8") as file1:
+#         file1.write(txt)
+#     file1.close()

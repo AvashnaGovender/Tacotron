@@ -42,7 +42,7 @@ lab_dir = f'{hp.data_path}/labels'
 
 
 ### generate a scheme file
-os.system(f'python utils/genScmFile.py \
+os.system(f'python scripts/genScmFile.py \
         {inp_txt} \
         {lab_dir}/prompt-utt \
         {lab_dir}/train_sentences.scm \

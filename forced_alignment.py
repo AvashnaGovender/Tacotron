@@ -23,7 +23,7 @@ if not "train.csv" in os.listdir(hp.data_path):
     exit()
 # Create utts.data from metadata.csv file
 
-os.system(f'python scripts/prepare_txt_done_data_file {hp.data_path}/train.csv {hp.data_path}/utts.data')
+os.system(f'python scripts/prepare_txt_done_data_file.py {hp.data_path}/train.csv {hp.data_path}/utts.data')
 
 exit()
 

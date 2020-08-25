@@ -78,4 +78,18 @@ if len(os.listdir(f'{lab_dir}/prompt-lab')) == 0:
 else:
     print(f'Labels are ready in: {lab_dir}/prompt-lab !!"')
 
+
+
+if not "htk" in os.listdir("tools"):
+    print("HTK is not installed!!")
+    print("Install festival using: bash tools/compile_htk.sh ")
+    exit()
+
+
+print("Running forced-alignment using HTK tools...")
+
+os.system(f'python scripts/state_align/forced_alignment.py --lab_dir {lab_dir} --wav_dir {hp.wav_path}')
+
+
+
 exit()

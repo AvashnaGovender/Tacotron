@@ -27,6 +27,28 @@ print("Creating utts.data file ... ")
 
 os.system(f'python scripts/prepare_txt_done_data_file.py {hp.data_path}/train.csv {hp.data_path}/utts.data')
 
+# Check if Festival is installed
+
+if not "festival" in os.listdir("tools"):
+    print("Festival is not installed!!")
+    print("Install festival using: bash tools/compile_festival.sh ")
+    exit()
+
+
+print("Preparing full-contextual labels without timestamps using Festival frontend ... ")
+
+inp_txt = f'{hp.data_path}/utts.data'
+lab_dir = f'{hp.data_path}/labels'
+
+
+### generate a scheme file
+os.system(f'python utils/genScmFile.py \
+        {inp_txt} \
+        {lab_dir}/prompt-utt \
+        {lab_dir}/train_sentences.scm \
+        {lab_dir}/file_id_list.scp')
+
+
 exit()
 
 # Check wav files and txt files are equal

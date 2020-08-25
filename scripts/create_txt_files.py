@@ -29,13 +29,3 @@ for line in content:
     file1 = open(f'{path}/{filename}.txt', 'w')
     file1.write(txt)
     file1.close()
-
-# utts.data format
-
-# for line in content:
-#     txt = line.split('\"')[1]
-#     filename = line.split(' ')[1]
-#
-#     with codecs.open(f'{path}/{filename}.txt', 'w', "utf-8") as file1:
-#         file1.write(txt)
-#     file1.close()

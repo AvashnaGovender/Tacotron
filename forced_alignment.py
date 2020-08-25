@@ -57,11 +57,11 @@ print("Creating utterances --  NB: takes a while ... ")
 
 print("Converting festival utts to labels...")
 
-os.system(f'scripts/festival_utt_to_lab/make_labels \
-                        {lab_dir}/prompt-lab \
-                        {lab_dir}/prompt-utt \
-                        tools/festival/examples/dumpfeats \
-                        scripts/festival_utt_to_lab ')
+# os.system(f'scripts/festival_utt_to_lab/make_labels \
+#                         {lab_dir}/prompt-lab \
+#                         {lab_dir}/prompt-utt \
+#                         tools/festival/examples/dumpfeats \
+#                         scripts/festival_utt_to_lab ')
 
 
 print("Normalizing label files for merlin...")
@@ -70,7 +70,7 @@ os.system(f'python scripts/normalize_lab_for_merlin.py \
                             {lab_dir}/prompt-lab/full \
                             {lab_dir}/label_no_align \
                             phone_align \
-                            {lab_dir}/file_id_scp 0 ')
+                            {lab_dir}/file_id_list.scp 0 ')
 
 
 if len(os.listdir(f'{lab_dir}/prompt-lab')) == 0:

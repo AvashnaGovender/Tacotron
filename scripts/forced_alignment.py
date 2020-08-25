@@ -40,7 +40,7 @@ for book in hp.book_names:
 
 # Run state aligner
 
-./scripts/run_state_aligner.sh $wav_dir $inp_txt $lab_dir $global_config_file
+#./scripts/run_state_aligner.sh $wav_dir $inp_txt $lab_dir $global_config_file
 # Check that txtdir is not empty
 
 if len(os.listdir(hp.txt_path) ) == 0:

@@ -66,11 +66,11 @@ print("Converting festival utts to labels...")
 
 print("Normalizing label files for merlin...")
 
-os.system(f'python scripts/normalize_lab_for_merlin.py \
-                            {lab_dir}/prompt-lab/full \
-                            {lab_dir}/label_no_align \
-                            phone_align \
-                            {lab_dir}/file_id_list.scp 0 ')
+# os.system(f'python scripts/normalize_lab_for_merlin.py \
+#                             {lab_dir}/prompt-lab/full \
+#                             {lab_dir}/label_no_align \
+#                             phone_align \
+#                             {lab_dir}/file_id_list.scp 0 ')
 
 
 if len(os.listdir(f'{lab_dir}/prompt-lab')) == 0:

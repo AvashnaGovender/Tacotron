@@ -19,7 +19,7 @@ paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
 # Check if train.csv file in data path
 
 if not "train.csv" in os.listdir(hp.data_path):
-    print("Please place train.csv file in the directory specificed in data_path in hparams.py")
+    print(f'Please place train.csv file in the directory specificed in {hp.data_path} in hparams.py')
     exit()
 # Create utts.data from metadata.csv file
 

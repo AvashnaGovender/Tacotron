@@ -252,7 +252,7 @@ NUMCEPS = 12
         speaker_utt_dict = self._check_data(file_id_list, multiple_speaker)
 
         print('---extracting features')
-        #self._HCopy()
+        self._HCopy()
         print(time.strftime("%c"))
 
         print('---feature_normalisation')

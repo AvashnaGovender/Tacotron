@@ -426,7 +426,7 @@ if __name__ == '__main__':
     multiple_speaker = False
 
     aligner = ForcedAlignment()
-    #aligner.prepare_training(file_id_list_name, wav_dir, lab_dir, work_dir, multiple_speaker)
+    aligner.prepare_training(file_id_list_name, wav_dir, lab_dir, work_dir, multiple_speaker)
 
     aligner.train_hmm(7, 32)
     aligner.align(work_dir, lab_align_dir)

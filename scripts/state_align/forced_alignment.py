@@ -1,6 +1,6 @@
 import os, sys, argparse
 import time
-
+import random, glob
 from sys import argv, stderr
 from subprocess import check_call, Popen, CalledProcessError, PIPE
 from mean_variance_norm import MeanVarianceNorm

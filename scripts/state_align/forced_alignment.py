@@ -280,6 +280,11 @@ NUMCEPS = 12
             mfc_files = fp.readlines()
         random.shuffle(mfc_files)
         n = len(mfc_files) / num_splits
+
+        print(len(mfc_files))
+        print(n)
+        [print(j) for j in range(0, len(mfc_files), n)]
+        
         mfc_chunks = [mfc_files[j:j + n] for j in range(0, len(mfc_files), n)]
 
 

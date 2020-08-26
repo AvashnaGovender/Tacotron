@@ -280,8 +280,10 @@ NUMCEPS = 12
             mfc_files = fp.readlines()
         random.shuffle(mfc_files)
         n = (len(mfc_files)+1) / num_splits
-        mfc_chunks = [mfc_files[j:j + n] for j in xrange(0, l for i in range(len(mfc_chunks)):
-            train_scp_chunks.append(os.path.join(self.cfg_dir with open(train_scp_chunks[i], "wt") as fp:
+        mfc_chunks = [mfc_files[j:j + n] for j in xrange(0, len(mfc_files), n)]
+        for i in range(len(mfc_chunks)):
+            train_scp_chunks.append(os.path.join(self.cfg_dir,"train_%d.scp" % i))
+            with open(train_scp_chunks[i], "wt") as fp:
                 fp.writelines(mfc_chunks[i])
 
 

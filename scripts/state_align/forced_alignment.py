@@ -272,17 +272,20 @@ NUMCEPS = 12
         print(time.strftime("%c"))
         print('---training HMM models')
 
-        # added by mtoman: call HErest in multiple chunks
+         # added by mtoman: call HErest in multiple chunks
         # split scp in num_splits chunks and save them
-        num_splits = 8
+        num_splits = 5
         train_scp_chunks = []
         with open(self.train_scp, "rt") as fp:
             mfc_files = fp.readlines()
         random.shuffle(mfc_files)
-        n = (len(mfc_files)+1) / num_splits
+        n = len(mfc_files) / num_splits
         mfc_chunks = [mfc_files[j:j + n] for j in range(0, len(mfc_files), n)]
+
+
+
         for i in range(len(mfc_chunks)):
-            train_scp_chunks.append(os.path.join(self.cfg_dir,"train_%d.scp" % i))
+            train_scp_chunks.append(os.path.join(self.cfg_dir, "train_%d.scp" % i))
             with open(train_scp_chunks[i], "wt") as fp:
                 fp.writelines(mfc_chunks[i])
 
@@ -291,7 +294,7 @@ NUMCEPS = 12
         done = 0
         mix = 1
         while mix <= num_mix and done == 0:
-            for i in xrange(niter):
+            for i in range(niter):
                 next_dir = os.path.join(self.model_dir, 'hmm_mix_' + str(mix) + '_iter_' + str(i+1))
                 if not os.path.exists(next_dir):
                     os.makedirs(next_dir)

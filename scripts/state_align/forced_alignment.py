@@ -217,7 +217,7 @@ NUMCEPS = 12
 
     def prepare_training(self, file_id_list_name, wav_dir, lab_dir, work_dir, multiple_speaker):
 
-        print('---preparing enverionment')
+        print('---preparing environment')
         self.cfg_dir = os.path.join(work_dir, 'config')
         self.model_dir = os.path.join(work_dir, 'model')
         self.cur_dir = os.path.join(self.model_dir, 'hmm0')
@@ -271,20 +271,52 @@ NUMCEPS = 12
 
         print(time.strftime("%c"))
         print('---training HMM models')
+
+        # added by mtoman: call HErest in multiple chunks
+        # split scp in num_splits chunks and save them
+        num_splits = 8
+        train_scp_chunks = []
+        with open(self.train_scp, "rt") as fp:
+            mfc_files = fp.readlines()
+        random.shuffle(mfc_files)
+        n = (len(mfc_files)+1) / num_splits
+        mfc_chunks = [mfc_files[j:j + n] for j in xrange(0, l for i in range(len(mfc_chunks)):
+            train_scp_chunks.append(os.path.join(self.cfg_dir with open(train_scp_chunks[i], "wt") as fp:
+                fp.writelines(mfc_chunks[i])
+
+
+
         done = 0
         mix = 1
         while mix <= num_mix and done == 0:
-            for i in range(niter):
+            for i in xrange(niter):
                 next_dir = os.path.join(self.model_dir, 'hmm_mix_' + str(mix) + '_iter_' + str(i+1))
                 if not os.path.exists(next_dir):
                     os.makedirs(next_dir)
-                check_call([HERest, '-C', self.cfg, '-S', self.train_scp,
-                            '-I', self.phoneme_mlf,
+
+                procs = []
+                # added by mtoman: estimate for each chunk
+                for chunk_num in range(len(train_scp_chunks)):
+                    procs.append(Popen([HERest, '-C', self.cfg,
+                                '-S', train_scp_chunks[chunk_num],
+                                '-I', self.phoneme_mlf,
+                                '-M', next_dir,
+                                '-H', os.path.join(self.cur_dir, MACROS),
+                                '-H', os.path.join(self.cur_dir, HMMDEFS),
+                                '-t'] + PRUNING + ['-p', str(chunk_num + 1),self.phonemes],
+                               stdout=PIPE))
+                # wait until all HERest calls are finished
+                for p in procs:
+                    p.wait()
+
+
+                check_call([HERest, '-C', self.cfg, '-S',
                             '-M', next_dir,
                             '-H', os.path.join(self.cur_dir, MACROS),
                             '-H', os.path.join(self.cur_dir, HMMDEFS),
-                            '-t'] + PRUNING + [self.phonemes],
-                           stdout=PIPE)
+                            '-t'] + PRUNING ['-p', '0',self.phonemes] + glob.glob(next_dir + os.sep + "*.acc"),
+                            stdout=PIPE)
+
                 self.cur_dir = next_dir
 
             if mix * 2 <= num_mix:
@@ -392,7 +424,7 @@ if __name__ == '__main__':
     multiple_speaker = False
 
     aligner = ForcedAlignment()
-    aligner.prepare_training(file_id_list_name, wav_dir, lab_dir, work_dir, multiple_speaker)
+    #aligner.prepare_training(file_id_list_name, wav_dir, lab_dir, work_dir, multiple_speaker)
 
     aligner.train_hmm(7, 32)
     aligner.align(work_dir, lab_align_dir)

@@ -316,7 +316,7 @@ NUMCEPS = 12
                     p.wait()
 
 
-                check_call([HERest, '-C', self.cfg, '-S',
+                check_call([HERest, '-C', self.cfg,
                             '-M', next_dir,
                             '-H', os.path.join(self.cur_dir, MACROS),
                             '-H', os.path.join(self.cur_dir, HMMDEFS),

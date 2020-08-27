@@ -25,7 +25,7 @@ if not "train.csv" in os.listdir(hp.data_path):
 # Create utts.data from metadata.csv file
 print("Creating utts.data file ... ")
 
-#os.system(f'python scripts/prepare_txt_done_data_file.py {hp.data_path}/train.csv {hp.data_path}/utts.data')
+os.system(f'python scripts/prepare_txt_done_data_file.py {hp.data_path}/train.csv {hp.data_path}/utts.data')
 
 # Check if Festival is installed
 
@@ -42,35 +42,35 @@ lab_dir = f'{hp.data_path}/labels'
 
 
 ### generate a scheme file
-# os.system(f'python scripts/genScmFile.py \
-#         {inp_txt} \
-#         {lab_dir}/prompt-utt \
-#         {lab_dir}/train_sentences.scm \
-#         {lab_dir}/file_id_list.scp')
+os.system(f'python scripts/genScmFile.py \
+        {inp_txt} \
+        {lab_dir}/prompt-utt \
+        {lab_dir}/train_sentences.scm \
+        {lab_dir}/file_id_list.scp')
 
 
 ## create utts using FESTIVAL
 print("Creating utterances --  NB: takes a while ... ")
-#os.system(f'tools/festival/bin/festival -b {lab_dir}/train_sentences.scm')
+os.system(f'tools/festival/bin/festival -b {lab_dir}/train_sentences.scm')
 
 
 
 print("Converting festival utts to labels...")
 
-# os.system(f'scripts/festival_utt_to_lab/make_labels \
-#                         {lab_dir}/prompt-lab \
-#                         {lab_dir}/prompt-utt \
-#                         tools/festival/examples/dumpfeats \
-#                         scripts/festival_utt_to_lab ')
+os.system(f'scripts/festival_utt_to_lab/make_labels \
+                        {lab_dir}/prompt-lab \
+                        {lab_dir}/prompt-utt \
+                        tools/festival/examples/dumpfeats \
+                        scripts/festival_utt_to_lab ')
 
 
 print("Normalizing label files for merlin...")
 
-# os.system(f'python scripts/normalize_lab_for_merlin.py \
-#                             {lab_dir}/prompt-lab/full \
-#                             {lab_dir}/label_no_align \
-#                             phone_align \
-#                             {lab_dir}/file_id_list.scp 0 ')
+os.system(f'python scripts/normalize_lab_for_merlin.py \
+                            {lab_dir}/prompt-lab/full \
+                            {lab_dir}/label_no_align \
+                            phone_align \
+                            {lab_dir}/file_id_list.scp 0 ')
 
 
 if len(os.listdir(f'{lab_dir}/prompt-lab')) == 0:
@@ -89,7 +89,3 @@ if not "htk" in os.listdir("tools"):
 print("Running forced-alignment using HTK tools...")
 
 os.system(f'python scripts/state_align/forced_alignment.py --lab_dir {lab_dir} --wav_dir {hp.wav_path}')
-
-
-
-exit()

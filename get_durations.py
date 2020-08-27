@@ -152,7 +152,8 @@ def main_work():
         exit()
 
    for labfile in os.listdir(f'{hp.data_path}/labels/label_state_align/'):
-
+       print(f'Processing {labfile} ... ')
+       
        labfile = Path(os.path.join(f'{hp.data_path}/labels/label_state_align/',labfile))
        (mono, lengths) =   merlin_state_label_to_monophones(labfile)
 

@@ -122,6 +122,35 @@ def read_transcript(transcript_file):
 
     return transcript
 
+def durations_to_attention_matrix(durations):
+    '''
+    Take array of durations, return selection matrix to replace A in attention mechanism.
+    E.g.:
+    durations_to_hard_attention_matrix(np.array([3,0,1,2]))
+    [[1. 1. 1. 0. 0. 0.]
+     [0. 0. 0. 0. 0. 0.]
+     [0. 0. 0. 1. 0. 0.]
+     [0. 0. 0. 0. 1. 1.]]
+    '''
+    nphones = len(durations)
+    nframes = durations.sum()
+    A = np.zeros((nframes, nphones), dtype=np.float32)
+    start = 0
+    for (i,dur) in enumerate(durations):
+        end = start + dur
+        A[start:end,i] = 1.0
+        start = end
+    assert A.sum(axis=1).all() == 1.0
+    assert A.sum(axis=0).all() == durations.all()
+    return A
+
+def save_guided_attention(matrix, outfile):
+
+    np.save(outfile, matrix, allow_pickle=False)
+    print('Created attention guide %s' %(outfile))
+
+
+
 
 def main_work():
 
@@ -153,7 +182,10 @@ def main_work():
 
    for labfile in os.listdir(f'{hp.data_path}/labels/label_state_align/'):
        print(f'Processing {labfile} ... ')
-       
+       labfile = Path(labfile)
+       os.makedirs(f'{hp.data_path}/attention_guides', exist_ok=True)
+       out_guide_file = Path(f'{hp.data_path}/attention_guides/{labfile.stem}.npy')
+
        labfile = Path(os.path.join(f'{hp.data_path}/labels/label_state_align/',labfile))
        (mono, lengths) =   merlin_state_label_to_monophones(labfile)
 
@@ -173,9 +205,15 @@ def main_work():
            assert len(transcript[labfile.stem]['phones']) == len(timings), (len(transcript[labfile.stem]['phones']), len(timings), transcript[labfile.stem]['phones'], timings)
            transcript[labfile.stem]['duration'] = timings
 
+           guided_attention_matrix = durations_to_attention_matrix(np.array(timings))
+           save_guided_attention(guided_attention_matrix, out_guide_file)
+
        else:
            print(f'{labfile} was not successfully processed!')
+
    write_transcript(transcript, outfile, duration=True)
+
+
 
 
 

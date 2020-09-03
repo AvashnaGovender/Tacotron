@@ -5,6 +5,23 @@ from sys import argv, stderr
 from subprocess import check_call, Popen, CalledProcessError, PIPE
 from mean_variance_norm import MeanVarianceNorm
 
+STATE_NUM=5
+F = str(0.01)
+SFAC = str(5.0)
+PRUNING = [str(i) for i in (250., 150., 2000.)]
+
+MACROS = 'macros'
+HMMDEFS = 'hmmdefs'
+VFLOORS = 'vFloors'
+
+##
+HTKDIR = '/disk/scratch/avashna/Samsung/Tacotron/tools/bin/htk'
+HCompV = os.path.join(HTKDIR, 'HCompV')
+HCopy  = os.path.join(HTKDIR, 'HCopy' )
+HERest = os.path.join(HTKDIR, 'HERest')
+HHEd   = os.path.join(HTKDIR, 'HHEd'  )
+HVite  = os.path.join(HTKDIR, 'HVite' )
+
 
 def align(work_dir, lab_align_dir, model_dir, lab_dir):
     """
@@ -79,7 +96,7 @@ if __name__ == '__main__':
     work_dir = args.lab_dir
     wav_dir = args.wav_dir
     model_dir = args.model_dir
-    
+
     lab_dir = os.path.join(work_dir, 'label_no_align')
     lab_align_dir = os.path.join(work_dir, 'label_state_align')
 

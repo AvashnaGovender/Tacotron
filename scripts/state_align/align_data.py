@@ -41,8 +41,8 @@ def align(work_dir, lab_align_dir, model_dir, lab_dir):
     check_call([HVite, '-a', '-f', '-m', '-y', 'lab', '-o', 'SM',
                 '-i', align_mlf, '-L', mono_lab_dir,
                 '-C', cfg, '-S', train_scp,
-                '-H', os.path.join(model_dir, MACROS),
-                '-H', os.path.join(model_dir, HMMDEFS),
+                '-H', os.path.join(model, MACROS),
+                '-H', os.path.join(model, HMMDEFS),
                 '-I', phoneme_mlf, '-t'] + PRUNING +
                ['-s', SFAC, phoneme_map, phonemes])
 

@@ -71,14 +71,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Forced alignment')
     parser.add_argument('--lab_dir', metavar='FILE', required = True, help='The directory containing labels')
     parser.add_argument('--wav_dir', metavar='FILE', required = True, help='The directory containing wavs')
+    parser.add_argument('--model_dir', metavar='FILE', required = True, help='The directory containing wavs')
 
     args = parser.parse_args()
 
 
     work_dir = args.lab_dir
-
     wav_dir = args.wav_dir
-
+    model_dir = args.model_dir
+    
     lab_dir = os.path.join(work_dir, 'label_no_align')
     lab_align_dir = os.path.join(work_dir, 'label_state_align')
 

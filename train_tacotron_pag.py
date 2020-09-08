@@ -130,21 +130,20 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print("x input", x[0].shape)
             print("x input", x[1].shape)
             print("x input", x[2].shape)
+
             print("mel input", m[0].shape)
             print("mel input", m[1].shape)
             print("mel input", m[2].shape)
+
+            print("att guide", att_guides[0].shape)
+            print("att guide",att_guides[1].shape)
+            print("att guide",att_guides[2].shape)
 
             # Parallelize model onto GPUS using workaround due to python bug
             if device.type == 'cuda' and torch.cuda.device_count() > 1:
                 m1_hat, m2_hat, attention = data_parallel_workaround(model, x, m)
             else:
                 m1_hat, m2_hat, attention = model(x, m)
-
-
-
-            print(att_guides[0].shape)
-            print(att_guides[1].shape)
-            print(att_guides[2].shape)
 
             print(attention[0].shape)
             print(attention[1].shape)

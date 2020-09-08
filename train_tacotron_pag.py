@@ -123,36 +123,21 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
         running_loss = 0
 
         # Perform 1 epoch
-        for i, (x, m, ids, _, att_guides, att_lens) in enumerate(train_set, 1):
+        for i, (x, m, ids, _, att_guides) in enumerate(train_set, 1):
 
             x, m = x.to(device), m.to(device)
 
-            print("x input", x[0].shape)
-            print("x input", x[1].shape)
-            print("x input", x[2].shape)
-
-            print("mel input", m[0].shape)
-            print("mel input", m[1].shape)
-            print("mel input", m[2].shape)
-
-            print("att guide", att_guides[0].shape)
-            print("att guide",att_guides[1].shape)
-            print("att guide",att_guides[2].shape)
-
-            print("att lens", att_lens[0])
-            print("att lens", att_lens[1])
-            print("att lens", att_lens[2])
-
-
             # Parallelize model onto GPUS using workaround due to python bug
             if device.type == 'cuda' and torch.cuda.device_count() > 1:
-                m1_hat, m2_hat, attention = data_parallel_workaround(model, x, m)
+                m1_hat, m2_hat, attention, r = data_parallel_workaround(model, x, m)
             else:
-                m1_hat, m2_hat, attention = model(x, m)
+                m1_hat, m2_hat, attention, r = model(x, m)
 
-            print(attention[0].shape)
-            print(attention[1].shape)
-            print(attention[2].shape)
+            #reduce guide by r factor
+            guided_attention = [ att_guides[t] for t in range(0, len(att_guides), r)]
+            print("guided", guided_attention.shape)
+            print("pred", attention,shape)
+
             exit()
 
             m1_loss = F.l1_loss(m1_hat, m)

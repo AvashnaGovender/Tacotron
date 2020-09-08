@@ -198,28 +198,9 @@ def collate_tts(batch, r):
     mel_lens = [x[3] for x in batch]
 
 
-    att_lens = [x[4].shape[-1] for x in batch]
-    max_x_att_len = max(att_lens) + 1
-
-    if max_x_att_len % r != 0:
-        max_x_att_len += r - max_x_att_len % r
-
-
     pre_att_guides = [x[4] for x in batch]
     att_guides = [pad2d_nonzero(x[4], max_x_len, max_spec_len) for x in batch]
     att_guides = np.stack(att_guides)
-
-    att_lens = [len(y[0]) for y in pre_att_guides]
-
-    # print("original shapes")
-    # print(pre_att_guides[0].shape)
-    # print(pre_att_guides[1].shape)
-    # print(pre_att_guides[2].shape)
-    # print("padded shapes")
-    # print(att_guides[0].shape)
-    # print(att_guides[1].shape)
-    # print(att_guides[2].shape)
-
 
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
@@ -227,7 +208,7 @@ def collate_tts(batch, r):
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.
-    return chars, mel, ids, mel_lens, att_guides, att_lens
+    return chars, mel, ids, mel_lens, att_guides
 
 
 class BinnedLengthSampler(Sampler):

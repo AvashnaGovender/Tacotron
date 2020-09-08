@@ -379,7 +379,7 @@ class Tacotron(nn.Module):
         print("final linear", linear.shape)
         print("attn_scores", attn_scores.shape)
 
-        return mel_outputs, linear, attn_scores
+        return mel_outputs, linear, attn_scores, self.r
 
     def generate(self, x, steps=2000):
         self.eval()

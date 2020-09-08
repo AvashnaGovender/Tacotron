@@ -246,8 +246,10 @@ class Decoder(nn.Module):
         # Compute the attention scores
         scores = self.attn_net(encoder_seq_proj, attn_hidden, t)
 
+        print("att net scores", scores.shape)
         # Dot product to create the context vector
         context_vec = scores @ encoder_seq
+        print("context vector", context_vec.shape)
         context_vec = context_vec.squeeze(1)
 
         # Concat Attention RNN output w. Context Vector & project
@@ -361,6 +363,10 @@ class Tacotron(nn.Module):
         linear = self.post_proj(postnet_out)
         linear = linear.transpose(1, 2)
 
+        print("attention scores",len(attn_scores) )
+        print("attention scores",len(attn_scores[0]) )
+        print("mel frames", len(mel_outputs))
+        print("mel frames", len(mel_outputs[0]))
         # For easy visualisation
         attn_scores = torch.cat(attn_scores, 1)
         # attn_scores = attn_scores.cpu().data.numpy()

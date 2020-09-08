@@ -133,6 +133,8 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             else:
                 m1_hat, m2_hat, attention, r = model(x, m)
 
+            print("pre-guided", len(att_guides))
+            print("pre-guided", len(att_guides[0]))
             #reduce guide by r factor
             guided_attention = [ att_guides[t] for t in range(0, len(att_guides), r)]
             print("guided", len(guided_attention))

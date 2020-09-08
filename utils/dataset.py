@@ -113,8 +113,6 @@ def get_tts_datasets(path: Path, batch_size, r):
 
     for (item_id, len) in dataset:
         if len <= hp.tts_max_mel_len:
-            
-
             if item_id in file_ids:
                 dataset_ids += [item_id]
                 mel_lengths += [len]
@@ -200,13 +198,13 @@ def collate_tts(batch, r):
     att_lens = [len(x[4]) for x in batch]
 
 
-    att_guides = [pad1d_nonzero(x[4], max_x_len) for x in batch]
+    att_guides = [pad1d_nonzero(x[4], att_lens) for x in batch]
     att_guides = np.stack(att_guides)
 
 
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
-    att_guides = torch.tensor(att_guides)
+    att_guides = torch.tensor(att_guides).long()
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.

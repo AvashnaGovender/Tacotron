@@ -98,7 +98,7 @@ def collate_vocoder(batch):
 ###################################################################################
 
 
-def get_tts_datasets(path: Path, batch_size, r):
+def get_tts_datasets(path: Path, batch_size, r, pag):
 
     with open(path/'dataset.pkl', 'rb') as f:
         dataset = pickle.load(f)
@@ -114,7 +114,8 @@ def get_tts_datasets(path: Path, batch_size, r):
     with open(path/'text_dict.pkl', 'rb') as f:
         text_dict = pickle.load(f)
 
-    train_dataset = TTSDataset(path, dataset_ids, text_dict)
+
+    train_dataset = TTSDataset(path, dataset_ids, text_dict, pag)
 
     sampler = None
 
@@ -143,13 +144,15 @@ class TTSDataset(Dataset):
         self.path = path
         self.metadata = dataset_ids
         self.text_dict = text_dict
+        self.att_guide_path = path/'attention_guides'
 
     def __getitem__(self, index):
         item_id = self.metadata[index]
         x = text_to_sequence(self.text_dict[item_id], hp.tts_cleaner_names)
         mel = np.load(self.path/'mel'/f'{item_id}.npy')
         mel_len = mel.shape[-1]
-        return x, mel, item_id, mel_len
+        att = np.load(self.att_guide_path/f'{item_id}.npy')
+        return x, mel, item_id, mel_len, att
 
     def __len__(self):
         return len(self.metadata)
@@ -182,12 +185,21 @@ def collate_tts(batch, r):
     ids = [x[2] for x in batch]
     mel_lens = [x[3] for x in batch]
 
+
+    att_lens = [len(x[4]) for x in batch]
+    max_x_att_len = max(att_lens)
+
+    att_guides = [pad1d(x[4], max_x_att_len) for x in batch]
+    att_guides = np.stack(att_guides)
+
+
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
+    att_guides = torch.tensor(att_guides)
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.
-    return chars, mel, ids, mel_lens
+    return chars, mel, ids, mel_lens, att_guides
 
 
 class BinnedLengthSampler(Sampler):

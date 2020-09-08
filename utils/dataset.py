@@ -181,6 +181,8 @@ def collate_tts(batch, r):
     x_lens = [len(x[0]) for x in batch]
     max_x_len = max(x_lens)
 
+
+
     chars = [pad1d(x[0], max_x_len) for x in batch]
     chars = np.stack(chars)
 
@@ -204,7 +206,7 @@ def collate_tts(batch, r):
 
 
     pre_att_guides = [x[4] for x in batch]
-    att_guides = [pad2d_nonzero(x[4], max_x_att_len, max_spec_len) for x in batch]
+    att_guides = [pad2d_nonzero(x[4], max_x_len, max_spec_len) for x in batch]
     att_guides = np.stack(att_guides)
 
     att_lens = [len(y[0]) for y in pre_att_guides]

@@ -137,7 +137,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print("pre-guided", len(att_guides[0]))
             #reduce guide by r factor
             ga = [ a[t] for a in att_guides for t in range(0, len(att_guides), r)]
-            guided_attention = [ga[k:k+attention[0]] for k in range(0, len(a), attention[0])]
+            guided_attention = [ga[k:k+attention[0]] for k in range(0, len(ga), attention[0])]
             print("guided", len(guided_attention))
             print("guided", len(guided_attention[0]))
             print("pred", len(attention))

@@ -127,6 +127,9 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
 
             x, m = x.to(device), m.to(device)
 
+            print("x input", x[0].shape)
+            print("x input", x[1].shape)
+            print("x input", x[2].shape)
             print("mel input", m[0].shape)
             print("mel input", m[1].shape)
             print("mel input", m[2].shape)

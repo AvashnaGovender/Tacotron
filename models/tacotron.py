@@ -343,6 +343,7 @@ class Tacotron(nn.Module):
         encoder_seq = self.encoder(x)
         encoder_seq_proj = self.encoder_proj(encoder_seq)
 
+        print("encoder seq proj", encoder_seq_proj.shape)
         # Need a couple of lists for outputs
         mel_outputs, attn_scores = [], []
 
@@ -355,8 +356,11 @@ class Tacotron(nn.Module):
             mel_outputs.append(mel_frames)
             attn_scores.append(scores)
 
-        print("mel frames", len(mel_outputs))
-        print("mel frames", len(mel_outputs[0]))
+        print("mel output frames", len(mel_outputs))
+        print("mel output frames", len(mel_outputs[0]))
+
+        print("attention scores",len(attn_scores) )
+        print("attention scores",len(attn_scores[0]))
         # Concat the mel outputs into sequence
         mel_outputs = torch.cat(mel_outputs, dim=2)
 
@@ -365,12 +369,15 @@ class Tacotron(nn.Module):
         linear = self.post_proj(postnet_out)
         linear = linear.transpose(1, 2)
 
-        print("attention scores",len(attn_scores) )
-        print("attention scores",len(attn_scores[0]) )
+
 
         # For easy visualisation
         attn_scores = torch.cat(attn_scores, 1)
         # attn_scores = attn_scores.cpu().data.numpy()
+
+        print("final mel_outputs", mel_outputs.shape)
+        print("final linear", linear.shape)
+        print("attn_scores", attn_scores.shape)
 
         return mel_outputs, linear, attn_scores
 

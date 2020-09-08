@@ -171,8 +171,8 @@ def pad1d(x, max_len):
 def pad2d(x, max_len):
     return np.pad(x, ((0, 0), (0, max_len - x.shape[-1])), mode='constant')
 
-def pad1d_nonzero(x, max_len):
-    return np.pad(x, ((0, 0), (0, max_len - x.shape[-1])), mode='constant', constant_values=(1,))
+def pad1d_nonzero(x, max_len, max_frame):
+    return np.pad(x, ((0, max_frame - x.shape[0]), (0, max_len - x.shape[-1])), mode='constant', constant_values=(1,))
     #return np.pad(x, (0, max_len - len(x)), mode='constant', constant_values=(1,))
 
 
@@ -201,7 +201,7 @@ def collate_tts(batch, r):
 
 
 
-    att_guides = [pad2d(x[4], max_x_att_len) for x in batch]
+    att_guides = [pad2d(x[4], max_x_att_len, max_spec_len) for x in batch]
     print(max_x_att_len)
     print(mel_lens[0])
     print(att_guides[0].shape)

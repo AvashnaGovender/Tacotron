@@ -355,6 +355,8 @@ class Tacotron(nn.Module):
             mel_outputs.append(mel_frames)
             attn_scores.append(scores)
 
+        print("mel frames", len(mel_outputs))
+        print("mel frames", len(mel_outputs[0]))
         # Concat the mel outputs into sequence
         mel_outputs = torch.cat(mel_outputs, dim=2)
 
@@ -365,8 +367,7 @@ class Tacotron(nn.Module):
 
         print("attention scores",len(attn_scores) )
         print("attention scores",len(attn_scores[0]) )
-        print("mel frames", len(mel_outputs))
-        print("mel frames", len(mel_outputs[0]))
+
         # For easy visualisation
         attn_scores = torch.cat(attn_scores, 1)
         # attn_scores = attn_scores.cpu().data.numpy()

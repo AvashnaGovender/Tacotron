@@ -115,7 +115,7 @@ def get_tts_datasets(path: Path, batch_size, r):
         if len <= hp.tts_max_mel_len:
             print(item_id)
             print(file_ids[0])
-
+            exit()
             if item_id in file_ids:
                 dataset_ids += [item_id]
                 mel_lengths += [len]

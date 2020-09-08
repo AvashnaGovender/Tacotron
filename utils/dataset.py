@@ -199,8 +199,11 @@ def collate_tts(batch, r):
     att_lens = [x[4].shape[-1] for x in batch]
     max_x_att_len = max(att_lens) + 1
 
+
+
     att_guides = [pad2d(x[4], max_x_att_len) for x in batch]
     print(max_x_att_len)
+    print(mel_lens[0])
     print(att_guides[0].shape)
     print(att_guides[1].shape)
     print(att_guides[2].shape)

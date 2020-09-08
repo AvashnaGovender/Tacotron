@@ -134,10 +134,14 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
                 m1_hat, m2_hat, attention = model(x, m)
 
 
-            print(att_guides)
-            print(att_guides.shape)
-            print(attention)
-            print(attention.shape)
+
+            print(att_guides[0].shape)
+            print(att_guides[1].shape)
+            print(att_guides[2].shape)
+
+            print(attention[0].shape)
+            print(attention[1].shape)
+            print(attention[2].shape)
             exit()
 
             m1_loss = F.l1_loss(m1_hat, m)

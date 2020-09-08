@@ -202,21 +202,21 @@ def collate_tts(batch, r):
 
 
     att_guides = [pad2d_nonzero(x[4], max_x_att_len, max_spec_len) for x in batch]
-    print(max_x_att_len)
-    print(mel_lens[0])
+    att_guides = np.stack(att_guides)
+
+    print("original shapes")
+    print(x[4][0].shape)
+    print(x[4][1].shape)
+    print(x[4][2].shape)
+    print("padded shapes")
     print(att_guides[0].shape)
     print(att_guides[1].shape)
     print(att_guides[2].shape)
-    print(att_guides[3].shape)
-    print(att_guides[4].shape)
-    print(att_guides[5].shape)
-
-    att_guides = np.stack(att_guides)
 
 
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
-    att_guides = torch.tensor(att_guides).long()
+    att_guides = torch.tensor(att_guides)
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.

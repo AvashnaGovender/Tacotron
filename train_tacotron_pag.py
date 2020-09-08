@@ -143,20 +143,20 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
 
             guided_attention = torch.tensor(guided_attention)
             guided_attention = guided_attention.to(device)
-            print("guided", guided_attention)
-            print("pred", attention)
 
             attention_loss = F.l1_loss(attention, guided_attention)
 
-            print("attention loss", attention_loss)
-
-            exit()
-
             m1_loss = F.l1_loss(m1_hat, m)
             m2_loss = F.l1_loss(m2_hat, m)
-            attention_loss = F.l1_loss(attention, att_guides)
 
+            print("attention loss", attention_loss)
+            print("m losses", m1_loss, m2_loss)
+            prev_loss = m1_loss + m2_loss
+            print("prev loss", prev_loss)
             loss = m1_loss + m2_loss + attention_loss
+            print("loss + att", loss)
+            exit()
+
 
             optimizer.zero_grad()
             loss.backward()

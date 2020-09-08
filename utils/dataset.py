@@ -204,7 +204,7 @@ def collate_tts(batch, r):
 
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
-    att_guides = torch.tensor(att_guides)
+    
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.

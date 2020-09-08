@@ -174,6 +174,8 @@ def pad2d(x, max_len):
 def pad1d_nonzero(x, max_len):
     print(x)
     print(max_len)
+    print(len(x))
+    print(np.pad(x, (0, max_len - len(x)), mode='constant', constant_values=(1,)))
     exit()
     return np.pad(x, (0, max_len - len(x)), mode='constant', constant_values=(1,))
 

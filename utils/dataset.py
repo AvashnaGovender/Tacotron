@@ -172,6 +172,9 @@ def pad2d(x, max_len):
     return np.pad(x, ((0, 0), (0, max_len - x.shape[-1])), mode='constant')
 
 def pad1d_nonzero(x, max_len):
+    print(x)
+    print(max_len)
+    exit()
     return np.pad(x, (0, max_len - len(x)), mode='constant', constant_values=(1,))
 
 

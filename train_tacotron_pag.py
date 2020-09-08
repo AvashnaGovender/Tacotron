@@ -142,7 +142,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             guided_attention = [ga[k:k+n] for k in range(0, len(ga), n)]
 
             guided_attention = torch.tensor(guided_attention)
-            
+            guided_attention = guided_attention.to(device)
             print("guided", guided_attention)
             print("pred", attention)
 

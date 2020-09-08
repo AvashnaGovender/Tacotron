@@ -203,6 +203,10 @@ def collate_tts(batch, r):
     print(att_guides[0].shape)
     print(att_guides[1].shape)
     print(att_guides[2].shape)
+    print(att_guides[3].shape)
+    print(att_guides[4].shape)
+    print(att_guides[5].shape)
+    
     att_guides = np.stack(att_guides)
 
 

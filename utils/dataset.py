@@ -109,12 +109,12 @@ def get_tts_datasets(path: Path, batch_size, r):
     with open(path/'train.scp', 'r') as f:
         file_ids = f.readlines()
 
-    file_ids = [file_ids[:-4] for x in file_ids]
+    file_ids = [file_ids[:-4].strip() for x in file_ids]
 
     for (item_id, len) in dataset:
         if len <= hp.tts_max_mel_len:
             print(item_id)
-            print(file_ids[0])
+            #print(file_ids[0])
             exit()
             if item_id in file_ids:
                 dataset_ids += [item_id]

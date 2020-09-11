@@ -17,7 +17,7 @@ def get_files(path, books, extension='.csv'):
 
             if bookname in books:
                 name = os.path.join(path, bookname, name)
-            filenames += [name]
+                filenames += [name]
     else:
         for x in content:
             name  = x.split("|")[0]

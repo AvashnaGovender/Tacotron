@@ -123,7 +123,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
         running_loss = 0
 
         # Perform 1 epoch
-        for i, (x, m, ids, _) in enumerate(train_set, 1):
+        for i, (x, m, ids, _ ) in enumerate(train_set, 1):
 
             x, m = x.to(device), m.to(device)
 
@@ -131,7 +131,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             if device.type == 'cuda' and torch.cuda.device_count() > 1:
                 m1_hat, m2_hat, attention = data_parallel_workaround(model, x, m)
             else:
-                m1_hat, m2_hat, attention = model(x, m)
+                m1_hat, m2_hat, attention, r = model(x, m)
 
             m1_loss = F.l1_loss(m1_hat, m)
             m2_loss = F.l1_loss(m2_hat, m)

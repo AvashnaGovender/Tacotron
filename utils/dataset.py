@@ -106,9 +106,6 @@ def get_tts_datasets(path: Path, batch_size, r):
     dataset_ids = []
     mel_lengths = []
 
-
-
-
     for (item_id, len) in dataset:
         if len <= hp.tts_max_mel_len:
                 dataset_ids += [item_id]
@@ -143,7 +140,7 @@ def get_tts_datasets(path: Path, batch_size, r):
 
 
 class TTSDataset(Dataset):
-    def __init__(self, path: Path, dataset_ids, text_dict, attention_guide):
+    def __init__(self, path: Path, dataset_ids, text_dict):
         self.path = path
         self.metadata = dataset_ids
         self.text_dict = text_dict

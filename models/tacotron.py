@@ -246,10 +246,10 @@ class Decoder(nn.Module):
         # Compute the attention scores
         scores = self.attn_net(encoder_seq_proj, attn_hidden, t)
 
-        print("att net scores", scores.shape)
+        #print("att net scores", scores.shape)
         # Dot product to create the context vector
         context_vec = scores @ encoder_seq
-        print("context vector", context_vec.shape)
+        #print("context vector", context_vec.shape)
         context_vec = context_vec.squeeze(1)
 
         # Concat Attention RNN output w. Context Vector & project
@@ -343,7 +343,7 @@ class Tacotron(nn.Module):
         encoder_seq = self.encoder(x)
         encoder_seq_proj = self.encoder_proj(encoder_seq)
 
-        print("encoder seq proj", encoder_seq_proj.shape)
+        #print("encoder seq proj", encoder_seq_proj.shape)
         # Need a couple of lists for outputs
         mel_outputs, attn_scores = [], []
 
@@ -356,11 +356,11 @@ class Tacotron(nn.Module):
             mel_outputs.append(mel_frames)
             attn_scores.append(scores)
 
-        print("mel output frames", len(mel_outputs))
-        print("mel output frames", len(mel_outputs[0]))
+        #print("mel output frames", len(mel_outputs))
+        #print("mel output frames", len(mel_outputs[0]))
 
-        print("attention scores",len(attn_scores) )
-        print("attention scores",len(attn_scores[0]))
+        #print("attention scores",len(attn_scores) )
+        #print("attention scores",len(attn_scores[0]))
         # Concat the mel outputs into sequence
         mel_outputs = torch.cat(mel_outputs, dim=2)
 
@@ -375,9 +375,9 @@ class Tacotron(nn.Module):
         attn_scores = torch.cat(attn_scores, 1)
         # attn_scores = attn_scores.cpu().data.numpy()
 
-        print("final mel_outputs", mel_outputs.shape)
-        print("final linear", linear.shape)
-        print("attn_scores", attn_scores.shape)
+        #print("final mel_outputs", mel_outputs.shape)
+        #print("final linear", linear.shape)
+        #print("attn_scores", attn_scores.shape)
 
         return mel_outputs, linear, attn_scores, self.r
 

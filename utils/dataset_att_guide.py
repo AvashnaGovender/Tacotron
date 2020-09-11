@@ -106,11 +106,14 @@ def get_tts_datasets(path: Path, batch_size, r):
     dataset_ids = []
     mel_lengths = []
 
+    with open(path/'train.scp', 'r') as f:
+        file_ids = f.readlines()
 
-
+    file_ids = [x[:-5].strip() for x in file_ids]
 
     for (item_id, len) in dataset:
         if len <= hp.tts_max_mel_len:
+            if item_id in file_ids:
                 dataset_ids += [item_id]
                 mel_lengths += [len]
 
@@ -143,18 +146,19 @@ def get_tts_datasets(path: Path, batch_size, r):
 
 
 class TTSDataset(Dataset):
-    def __init__(self, path: Path, dataset_ids, text_dict, attention_guide):
+    def __init__(self, path: Path, dataset_ids, text_dict):
         self.path = path
         self.metadata = dataset_ids
         self.text_dict = text_dict
-
+        self.att_guide_path = path/'attention_guides'
 
     def __getitem__(self, index):
         item_id = self.metadata[index]
         x = text_to_sequence(self.text_dict[item_id], hp.tts_cleaner_names)
         mel = np.load(self.path/'mel'/f'{item_id}.npy')
         mel_len = mel.shape[-1]
-        return x, mel, item_id, mel_len
+        att = np.load(self.att_guide_path/f'{item_id}.npy')
+        return x, mel, item_id, mel_len, att
 
     def __len__(self):
         return len(self.metadata)
@@ -166,6 +170,10 @@ def pad1d(x, max_len):
 
 def pad2d(x, max_len):
     return np.pad(x, ((0, 0), (0, max_len - x.shape[-1])), mode='constant')
+
+def pad2d_nonzero(x, max_len, max_frame):
+    return np.pad(x, ((0, max_frame - x.shape[0]), (0, max_len - x.shape[-1])), mode='constant', constant_values=(-1,))
+    #return np.pad(x, (0, max_len - len(x)), mode='constant', constant_values=(1,))
 
 
 def collate_tts(batch, r):
@@ -189,13 +197,18 @@ def collate_tts(batch, r):
     ids = [x[2] for x in batch]
     mel_lens = [x[3] for x in batch]
 
+
+    pre_att_guides = [x[4] for x in batch]
+    att_guides = [pad2d_nonzero(x[4], max_x_len, max_spec_len) for x in batch]
+    att_guides = np.stack(att_guides)
+
     chars = torch.tensor(chars).long()
     mel = torch.tensor(mel)
 
 
     # scale spectrograms to -4 <--> 4
     mel = (mel * 8.) - 4.
-    return chars, mel, ids, mel_lens
+    return chars, mel, ids, mel_lens, att_guides
 
 
 class BinnedLengthSampler(Sampler):

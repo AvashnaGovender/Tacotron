@@ -123,7 +123,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
         running_loss = 0
 
         # Perform 1 epoch
-        for i, (x, m, ids, _, _ ) in enumerate(train_set, 1):
+        for i, (x, m, ids, _) in enumerate(train_set, 1):
 
             x, m = x.to(device), m.to(device)
 

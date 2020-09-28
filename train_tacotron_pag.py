@@ -3,7 +3,7 @@ from torch import optim
 import torch.nn.functional as F
 from utils import hparams as hp
 from utils.display import *
-from utils.dataset import get_tts_datasets
+from utils.dataset_att_guide import get_tts_datasets
 from utils.text.symbols import symbols
 from utils.paths import Paths
 from models.tacotron import Tacotron
@@ -158,7 +158,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             mask_sum = torch.sum(attention_masks)
 
             attention_loss /= mask_sum
-            
+
             m1_loss = F.l1_loss(m1_hat, m)
             m2_loss = F.l1_loss(m2_hat, m)
 

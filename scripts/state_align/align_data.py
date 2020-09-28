@@ -87,14 +87,12 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Forced alignment')
     parser.add_argument('--lab_dir', metavar='FILE', required = True, help='The directory containing labels')
-    parser.add_argument('--wav_dir', metavar='FILE', required = True, help='The directory containing wavs')
-    parser.add_argument('--model_dir', metavar='FILE', required = True, help='The directory containing wavs')
+    parser.add_argument('--model_dir', metavar='FILE', required = True, help='The directory containing models')
 
     args = parser.parse_args()
 
 
     work_dir = args.lab_dir
-    wav_dir = args.wav_dir
     model_dir = args.model_dir
 
     lab_dir = os.path.join(work_dir, 'label_no_align')
@@ -103,3 +101,5 @@ if __name__ == '__main__':
     file_id_list_name = os.path.join(work_dir, 'file_id_list.scp')
 
     align(work_dir, lab_align_dir, model_dir, lab_dir)
+
+    #python scripts/align_data.py --lab_dir ../data/data/CB_EM_PAG/labels --model_dir /disk/scratch/avashna/Samsung/data/data/bc/labels

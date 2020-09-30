@@ -153,7 +153,13 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #create attention mask
             attention_masks = torch.ne(guided_attention, -1).type(torch.FloatTensor)
 
-            attention_loss = torch.sum(torch.abs(attention * guided_attention) * attention_masks)
+            multiply = torch.abs(attention * guided_attention) * attention_masks
+            print(multiply)
+            print(attention.shape)
+            print(guided_attention.shape)
+            print(attention_masks.shape)
+            print(multiply.shape)
+            attention_loss = torch.sum(multiply)
 
             mask_sum = torch.sum(attention_masks)
 

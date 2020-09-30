@@ -189,7 +189,9 @@ def collate_tts(batch, r):
     x_lens = [len(x[0]) for x in batch]
     max_x_len = max(x_lens)
 
-    print(x_lens)
+    for x in batch:
+        print(x[0])
+        
     print("max_x_len", max_x_len)
 
     chars = [pad1d(x[0], max_x_len) for x in batch]

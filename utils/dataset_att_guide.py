@@ -155,7 +155,6 @@ class TTSDataset(Dataset):
     def __getitem__(self, index):
         item_id = self.metadata[index]
         x = text_to_sequence(self.text_dict[item_id], hp.tts_cleaner_names)
-        print(x)
         mel = np.load(self.path/'mel'/f'{item_id}.npy')
         mel_len = mel.shape[-1]
         att = np.load(self.att_guide_path/f'{item_id}.npy')
@@ -193,6 +192,7 @@ def collate_tts(batch, r):
     for x in batch:
         print(len(x[0]))
         print(x[4].shape)
+        print(x[1].shape)
 
     print("max_x_len", max_x_len)
 

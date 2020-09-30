@@ -100,6 +100,6 @@ def voxygen_cleaners(text):
 
 def blizz_cleaners(text):
     text = collapse_whitespace(text)
-    text = text.replace(' ','')
-    text = text.replace('<>',' ')
+    #text = text.replace(' ','')
+    #text = text.replace('<>',' ')
     return text

@@ -191,7 +191,8 @@ def collate_tts(batch, r):
     max_x_len = max(x_lens)
 
     for x in batch:
-        print(x[0])
+        print(len(x[0]))
+        print(x[4].shape)
 
     print("max_x_len", max_x_len)
 

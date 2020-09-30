@@ -189,12 +189,6 @@ def collate_tts(batch, r):
     x_lens = [len(x[0]) for x in batch]
     max_x_len = max(x_lens)
 
-    for x in batch:
-        print(x[2])
-        print(len(x[0]))
-        print(x[4].shape)
-        print(x[1].shape)
-
     print("max_x_len", max_x_len)
 
     chars = [pad1d(x[0], max_x_len) for x in batch]
@@ -212,8 +206,11 @@ def collate_tts(batch, r):
     mel_lens = [x[3] for x in batch]
 
 
+    phone_x_lens = [len(x[4]) for x in batch]
+    max_phone_len = max(phone_x_lens)
+
     pre_att_guides = [x[4] for x in batch]
-    att_guides = [pad2d_nonzero(x[4], max_x_len, max_spec_len) for x in batch]
+    att_guides = [pad2d_nonzero(x[4], max_phone_len, max_spec_len) for x in batch]
     att_guides = np.stack(att_guides)
 
     chars = torch.tensor(chars).long()

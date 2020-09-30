@@ -176,7 +176,7 @@ def pad2d_nonzero(x, max_len, max_frame):
     print("max_frame", max_frame)
     print("x[0]", x.shape[0])
     print("max_len", max_len)
-    print("x[0]", x.shape[-1])
+    print("x[1]", x.shape[-1])
 
     print(np.pad(x, ((0, max_frame - x.shape[0]), (0, max_len - x.shape[-1])), mode='constant', constant_values=(-1,)))
     exit()

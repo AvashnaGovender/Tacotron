@@ -34,7 +34,7 @@ def text_to_sequence(text, cleaner_names):
       if c in symbols:
             sequence.append(symbols.index(c))
 
-  print(sequence)
+  
   return sequence
 
   # Check for curly braces and treat their contents as ARPAbet:

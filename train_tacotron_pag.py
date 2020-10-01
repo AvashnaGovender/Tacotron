@@ -137,7 +137,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print(att_guides.shape)
 
             n = int(len(att_guides[0])/r)
-
+            print("n", n)
             #reduce guide by r factor
             ga = [ a[t] for a in att_guides for t in range(0, len(a), r)]
 
@@ -150,6 +150,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #pad attention to match guided attention
             #guided_attention = np_now(guided_attention)
             attention = np_now(attention)
+            print("dim",len(guided_attention[0]))
             attention = [pad2d_nonzero(x, n, len(guided_attention[0])) for x in attention]
 
 

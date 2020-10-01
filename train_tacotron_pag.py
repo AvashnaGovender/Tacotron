@@ -144,7 +144,9 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             assert n == len(attention[0])
             guided_attention = [ga[k:k+n] for k in range(0, len(ga), n)]
 
-            
+            guided_attention = torch.tensor(guided_attention)
+            #guided_attention = guided_attention.to(device)
+
             #pad attention to match guided attention
 
             attention = np.pad(attention, ((0, 0), (0, guided_attention.shape[-1] - attention.shape[-1])), mode='constant', constant_values=(-1,))

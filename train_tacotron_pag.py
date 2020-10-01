@@ -154,7 +154,14 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print("dim",len(att_guides[0]))
             attention = [pad2d_nonzero(x, n, len(att_guides[0])) for x in attention]
 
+            guided_attention = torch.tensor(guided_attention)
+            guided_attention = guided_attention.to(device)
 
+            attention = torch.tensor(attention)
+            attention = attention.to(device)
+
+            print(guided_attention.shape)
+            print(attention.shape)
             #print("Guided attention")
             #print(guided_attention)
 
@@ -167,7 +174,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print(ids)
             print(m.shape)
             print(x.shape)
-            print(attention.shape)
+
             print(guided_attention.shape)
             print(attention_masks.shape)
 

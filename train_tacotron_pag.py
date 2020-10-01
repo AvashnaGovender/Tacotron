@@ -149,7 +149,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
 
             #pad attention to match guided attention
 
-            attention = np.pad(attention, ((0, 0), (0, len(guided_attention[0]) - len(attention[0])), mode='constant', constant_values=(-1,))
+            attention = np.pad(attention, ((0, 0), (0, len(guided_attention[0]) - len(attention[0]))), mode='constant', constant_values=(-1,))
 
 
             #print("Guided attention")

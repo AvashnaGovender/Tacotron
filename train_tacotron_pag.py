@@ -171,6 +171,9 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #create attention mask
             attention_masks = torch.ne(attention, -1).type(torch.FloatTensor)
 
+            attention_masks = torch.tensor(attention_masks)
+            attention_masks = attention.to(device)
+
             print(ids)
             print(m.shape)
             print(x.shape)

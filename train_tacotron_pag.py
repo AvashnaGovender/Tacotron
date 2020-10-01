@@ -151,7 +151,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #guided_attention = np_now(guided_attention)
             attention = np_now(attention)
             print("dim",len(guided_attention[0]))
-            attention = [pad2d_nonzero(x, n, len(guided_attention[0])) for x in attention]
+            attention = [pad2d_nonzero(x, n, len(att_guides[0])) for x in attention]
 
 
             #print("Guided attention")

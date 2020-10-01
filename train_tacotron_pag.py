@@ -3,7 +3,7 @@ from torch import optim
 import torch.nn.functional as F
 from utils import hparams as hp
 from utils.display import *
-from utils.dataset_att_guide import get_tts_datasets, pad2d_nonzero
+from utils.dataset_att_guide import get_tts_datasets
 from utils.text.symbols import symbols
 from utils.paths import Paths
 from models.tacotron import Tacotron
@@ -18,6 +18,7 @@ from utils.checkpoints import save_checkpoint, restore_checkpoint
 
 
 def np_now(x: torch.Tensor): return x.detach().cpu().numpy()
+def pad2d_nonzero(x, max_x, max_y):   return np.pad(x, ((0, 0), (0, max_y - x.shape[-1])), mode='constant', constant_values=(-1,))
 
 
 def main():
@@ -150,7 +151,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #pad attention to match guided attention
             #guided_attention = np_now(guided_attention)
             attention = np_now(attention)
-            print("dim",len(guided_attention[0]))
+            print("dim",len(att_guides[0]))
             attention = [pad2d_nonzero(x, n, len(att_guides[0])) for x in attention]
 
 

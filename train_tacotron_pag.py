@@ -135,23 +135,17 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
                 m1_hat, m2_hat, attention, r = model(x, m)
 
 
-            print(att_guides.shape)
+            #print(att_guides.shape)
 
             n = int(len(att_guides[0])/r)
-            print("n", n)
+            #print("n", n)
             #reduce guide by r factor
             ga = [ a[t] for a in att_guides for t in range(0, len(a), r)]
 
             assert n == len(attention[0])
             guided_attention = [ga[k:k+n] for k in range(0, len(ga), n)]
 
-            #guided_attention = torch.tensor(guided_attention)
-            #guided_attention = guided_attention.to(device)
-
-            #pad attention to match guided attention
-            #guided_attention = np_now(guided_attention)
             attention = np_now(attention)
-            print("dim",len(att_guides[0][0]))
             attention = [pad2d_nonzero(x, n, len(att_guides[0][0])) for x in attention]
 
             guided_attention = torch.tensor(guided_attention)
@@ -160,13 +154,6 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             attention = torch.tensor(attention)
             attention = attention.to(device)
 
-            print(guided_attention.shape)
-            print(attention.shape)
-            #print("Guided attention")
-            #print(guided_attention)
-
-            #print("Predicted attention")
-            #print(attention)
 
             #create attention mask
             attention_masks = torch.ne(attention, -1).type(torch.FloatTensor)
@@ -174,34 +161,26 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             attention_masks = torch.tensor(attention_masks)
             attention_masks = attention.to(device)
 
-            print(ids)
-            print(m.shape)
-            print(x.shape)
-
-            print(guided_attention.shape)
-            print(attention_masks.shape)
-
 
             multiply = torch.abs(attention * guided_attention) * attention_masks
-            print(multiply)
-            print(multiply.shape)
+
             attention_loss = torch.sum(multiply)
 
             mask_sum = torch.sum(attention_masks)
+
 
             attention_loss /= mask_sum
 
             m1_loss = F.l1_loss(m1_hat, m)
             m2_loss = F.l1_loss(m2_hat, m)
 
-            print("attention loss", attention_loss)
-            print("m losses", m1_loss, m2_loss)
+            #print("mask sum", mask_sum)
+            #print("attention loss", attention_loss)
+            #print("m losses", m1_loss, m2_loss)
             prev_loss = m1_loss + m2_loss
-            print("prev loss", prev_loss)
+            #print("prev loss", prev_loss)
             loss = m1_loss + m2_loss + attention_loss
-            print("loss + att", loss)
-            exit()
-
+            #print("loss + att", loss)
 
             optimizer.zero_grad()
             loss.backward()

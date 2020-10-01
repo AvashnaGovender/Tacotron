@@ -137,7 +137,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             print(att_guides.shape)
 
             n = int(len(att_guides[0])/r)
-            print(n)
+
             #reduce guide by r factor
             ga = [ a[t] for a in att_guides for t in range(0, len(a), r)]
 
@@ -147,14 +147,19 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             guided_attention = torch.tensor(guided_attention)
             guided_attention = guided_attention.to(device)
 
-            print("Guided attention")
-            print(guided_attention)
+            #pad attention to match guided attention
 
-            print("Predicted attention")
-            print(attention)
+            attention = np.pad(attention, ((0, 0), (0, guided_attention.shape[-1] - attention.shape[-1])), mode='constant', constant_values=(-1,))
+
+
+            #print("Guided attention")
+            #print(guided_attention)
+
+            #print("Predicted attention")
+            #print(attention)
 
             #create attention mask
-            attention_masks = torch.ne(guided_attention, -1).type(torch.FloatTensor)
+            attention_masks = torch.ne(attention, -1).type(torch.FloatTensor)
 
             print(ids)
             print(m.shape)

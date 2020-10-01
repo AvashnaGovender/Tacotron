@@ -151,8 +151,8 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
             #pad attention to match guided attention
             #guided_attention = np_now(guided_attention)
             attention = np_now(attention)
-            print("dim",len(att_guides[-1]))
-            attention = [pad2d_nonzero(x, n, len(att_guides[-1])) for x in attention]
+            print("dim",len(att_guides))
+            attention = [pad2d_nonzero(x, n, len(att_guides)) for x in attention]
 
             guided_attention = torch.tensor(guided_attention)
             guided_attention = guided_attention.to(device)

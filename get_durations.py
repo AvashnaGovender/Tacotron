@@ -144,8 +144,18 @@ def durations_to_attention_matrix(durations):
     assert A.sum(axis=0).all() == durations.all()
     return A
 
-def save_guided_attention(matrix, outfile):
+def get_attention_guide(xdim, ydim, g=0.2):
+    '''Guided attention. DCTTS (following page 3 in paper)'''
+    W = np.zeros((xdim, ydim), dtype=np.float32)
+    for n_pos in range(xdim):
+        for t_pos in range(ydim):
+            W[n_pos, t_pos] = 1 - np.exp(-(t_pos / float(ydim) - n_pos / float(xdim)) ** 2 / (2 * g * g))
+    return W
 
+
+
+
+def save_guided_attention(matrix, outfile):
     np.save(outfile, matrix, allow_pickle=False)
     print('Created attention guide %s' %(outfile))
 
@@ -162,8 +172,8 @@ def main_work():
 
    hp.configure(args.hp_file)  # Load hparams from file
 
-   transcript_file = Path(f'{hp.data_path}/train.csv')
-   outfile = Path(f'{hp.data_path}/train_durations.csv')
+   transcript_file = Path(f'{hp.data_path}/train_dctts.csv')
+   outfile = Path(f'{hp.data_path}/train_durations_dctts.csv')
    transcript = read_transcript(transcript_file)
 
    # check if label files exist
@@ -183,8 +193,8 @@ def main_work():
    for labfile in os.listdir(f'{hp.data_path}/labels/label_state_align/'):
        print(f'Processing {labfile} ... ')
        labfile = Path(labfile)
-       os.makedirs(f'{hp.data_path}/attention_guides', exist_ok=True)
-       out_guide_file = Path(f'{hp.data_path}/attention_guides/{labfile.stem}.npy')
+       os.makedirs(f'{hp.data_path}/attention_guides_dctts', exist_ok=True)
+       out_guide_file = Path(f'{hp.data_path}/attention_guides_dctts/{labfile.stem}.npy')
 
        labfile = Path(os.path.join(f'{hp.data_path}/labels/label_state_align/',labfile))
        (mono, lengths) =   merlin_state_label_to_monophones(labfile)
@@ -192,13 +202,13 @@ def main_work():
 
        mel_file = labfile.stem
        mel_features = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
-       audio_msec_length = mel_features.shape[1] * 12.5
+       audio_msec_length = mel_features.shape[1] * 50
 
 
-       resampled_lengths = resample_timings(lengths, from_rate=5.0, to_rate=12.5, total_duration=audio_msec_length)
+       resampled_lengths = resample_timings(lengths, from_rate=5.0, to_rate=50, total_duration=audio_msec_length)
 
        if resampled_lengths is not None:
-           resampled_lengths_in_frames = (resampled_lengths / 12.5).astype(int)
+           resampled_lengths_in_frames = (resampled_lengths / 50).astype(int)
            timings = match_up((mono, resampled_lengths_in_frames), transcript[labfile.stem]['phones'])
 
 

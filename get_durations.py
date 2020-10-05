@@ -203,12 +203,12 @@ def main_work():
        mel_file = labfile.stem
        mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
        audio_msec_length = mel_features.shape[1] * 50
-
+       audio_msec_length_12 = mel_features.shape[1] * 50
 
        resampled_lengths = resample_timings(lengths, from_rate=5.0, to_rate=50.0, total_duration=audio_msec_length)
        print(resampled_lengths)
 
-       resampled_lengths_12 = resample_timings(lengths, from_rate=5.0, to_rate=12.5, total_duration=audio_msec_length)
+       resampled_lengths_12 = resample_timings(lengths, from_rate=5.0, to_rate=12.5, total_duration=audio_msec_length_12)
        print(resampled_lengths)
 
        exit()

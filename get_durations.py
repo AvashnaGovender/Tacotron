@@ -24,7 +24,7 @@ def merlin_state_label_to_monophones(labfile):
     lengths = (ends - starts) / 10000 ## length in msec
     return (mono, lengths)
 
-def resample_timings(lengths, from_rate=5.0, to_rate=50, total_duration=0):
+def resample_timings(lengths, from_rate=5.0, to_rate=50.0, total_duration=0):
     '''
     lengths: array of durations in msec. Each value is divisible by from_rate.
     Return converted sequence where values are divisible by to_rate.
@@ -201,12 +201,17 @@ def main_work():
 
 
        mel_file = labfile.stem
-       mel_features = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
+       mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
        audio_msec_length = mel_features.shape[1] * 50
 
 
-       resampled_lengths = resample_timings(lengths, from_rate=5.0, to_rate=50, total_duration=audio_msec_length)
+       resampled_lengths = resample_timings(lengths, from_rate=5.0, to_rate=50.0, total_duration=audio_msec_length)
+       print(resampled_lengths)
 
+       resampled_lengths_12 = resample_timings(lengths, from_rate=5.0, to_rate=12.5, total_duration=audio_msec_length)
+       print(resampled_lengths)
+
+       exit()
        if resampled_lengths is not None:
            resampled_lengths_in_frames = (resampled_lengths / 50).astype(int)
            timings = match_up((mono, resampled_lengths_in_frames), transcript[labfile.stem]['phones'])

@@ -230,10 +230,10 @@ def main_work():
            print(guided_attention_matrix)
            print(guided_attention_matrix.shape)
 
-            guided_attention_matrix = durations_to_attention_matrix(np.array(timings_2))
+           guided_attention_matrix = durations_to_attention_matrix(np.array(timings_2))
 
-            print(guided_attention_matrix)
-            print(guided_attention_matrix.shape)
+           print(guided_attention_matrix)
+           print(guided_attention_matrix.shape)
 
            exit()
            save_guided_attention(guided_attention_matrix, out_guide_file)

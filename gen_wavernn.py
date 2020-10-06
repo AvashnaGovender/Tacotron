@@ -27,8 +27,9 @@ def gen_testset(model: WaveRNN, test_set, samples, batched, target, overlap, sav
         else:
             x = label_2_float(x, bits)
 
-        save_wav(x, save_path/f'{k}k_steps_{i}_target.wav')
         new_index = i+100
+        save_wav(x, save_path/f'{k}k_steps_{new_index}_target.wav')
+        
         batch_str = f'gen_batched_target{target}_overlap{overlap}' if batched else 'gen_NOT_BATCHED'
         save_str = str(save_path/f'{new_index}_{k}k_steps_vocoded.wav')
 

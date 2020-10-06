@@ -202,22 +202,24 @@ def main_work():
 
        mel_file = labfile.stem
        mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
-       print(mel_features.shape)
        audio_msec_length = mel_features.shape[0] * 50
-       print(audio_msec_length)
        mel_features_12 = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
-       print(mel_features_12.shape)
        audio_msec_length_12 = mel_features_12.shape[1] * 12.5
-       print(audio_msec_length_12)
        resampled_lengths = resample_timings(lengths, 5.0, 50.0, total_duration=audio_msec_length)
-       print(resampled_lengths)
-
        resampled_lengths_12 = resample_timings(lengths, 5.0, 12.5, total_duration=audio_msec_length_12)
-       print(resampled_lengths)
 
-       exit()
+
+
        if resampled_lengths is not None:
            resampled_lengths_in_frames = (resampled_lengths / 50).astype(int)
+           print(resampled_lengths_in_frames )
+
+           resampled_lengths_in_frames_12 = (resampled_lengths_12 / 12.5).astype(int)
+           print(resampled_lengths_in_frames_12 )
+
+
+           exit()
+
            timings = match_up((mono, resampled_lengths_in_frames), transcript[labfile.stem]['phones'])
 
 

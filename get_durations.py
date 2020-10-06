@@ -171,6 +171,8 @@ def main_work():
 
 
    hp.configure(args.hp_file)  # Load hparams from file
+   
+   time_step = 50.0
 
    transcript_file = Path(f'{hp.data_path}/train_dctts.csv')
    outfile = Path(f'{hp.data_path}/train_durations_dctts.csv')
@@ -202,24 +204,21 @@ def main_work():
 
        mel_file = labfile.stem
        mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
-       audio_msec_length = mel_features.shape[0] * 50
-       mel_features_12 = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
-       audio_msec_length_12 = mel_features_12.shape[1] * 12.5
-       resampled_lengths = resample_timings(lengths, 5.0, 50.0, total_duration=audio_msec_length)
-       resampled_lengths_12 = resample_timings(lengths, 5.0, 12.5, total_duration=audio_msec_length_12)
+       audio_msec_length = mel_features.shape[0] * time_step
+
+       # NOTE THE DIMENSIONS -- dctts nframe is in [0] and taco is in [1]
+       #mel_features_12 = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
+       #audio_msec_length_12 = mel_features_12.shape[1] * 12.5
+
+       resampled_lengths = resample_timings(lengths, 5.0, time_step, total_duration=audio_msec_length)
 
 
 
        if resampled_lengths is not None:
-           resampled_lengths_in_frames = (resampled_lengths / 50).astype(int)
-           print(resampled_lengths_in_frames )
-
-           resampled_lengths_in_frames_12 = (resampled_lengths_12 / 12.5).astype(int)
-           print(resampled_lengths_in_frames_12 )
+           resampled_lengths_in_frames = (resampled_lengths / time_step).astype(int)
 
 
            timings = match_up((mono, resampled_lengths_in_frames), transcript[labfile.stem]['phones'])
-           timings_2 = match_up((mono, resampled_lengths_in_frames_12), transcript[labfile.stem]['phones'])
 
 
            assert len(transcript[labfile.stem]['phones']) == len(timings), (len(transcript[labfile.stem]['phones']), len(timings), transcript[labfile.stem]['phones'], timings)
@@ -227,15 +226,6 @@ def main_work():
 
            guided_attention_matrix = durations_to_attention_matrix(np.array(timings))
 
-           print(guided_attention_matrix)
-           print(guided_attention_matrix.shape)
-
-           guided_attention_matrix = durations_to_attention_matrix(np.array(timings_2))
-
-           print(guided_attention_matrix)
-           print(guided_attention_matrix.shape)
-
-           exit()
            save_guided_attention(guided_attention_matrix, out_guide_file)
 
        else:

@@ -218,15 +218,24 @@ def main_work():
            print(resampled_lengths_in_frames_12 )
 
 
-           exit()
-
            timings = match_up((mono, resampled_lengths_in_frames), transcript[labfile.stem]['phones'])
+           timings_2 = match_up((mono, resampled_lengths_in_frames_12), transcript[labfile.stem]['phones'])
 
 
            assert len(transcript[labfile.stem]['phones']) == len(timings), (len(transcript[labfile.stem]['phones']), len(timings), transcript[labfile.stem]['phones'], timings)
            transcript[labfile.stem]['duration'] = timings
 
            guided_attention_matrix = durations_to_attention_matrix(np.array(timings))
+
+           print(guided_attention_matrix)
+           print(guided_attention_matrix.shape)
+
+            guided_attention_matrix = durations_to_attention_matrix(np.array(timings_2))
+
+            print(guided_attention_matrix)
+            print(guided_attention_matrix.shape)
+
+           exit()
            save_guided_attention(guided_attention_matrix, out_guide_file)
 
        else:

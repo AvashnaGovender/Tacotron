@@ -42,8 +42,8 @@ def get_vocoder_datasets(path: Path, batch_size, train_gta):
     random.seed(1234)
     random.shuffle(dataset_ids)
 
-    test_ids = dataset_ids[-hp.voc_test_samples:]
-    train_ids = dataset_ids[:-hp.voc_test_samples]
+    train_ids = dataset_ids[-hp.voc_test_samples:]
+    test_ids = dataset_ids[:-hp.voc_test_samples]
 
     train_dataset = VocoderDataset(path, train_ids, train_gta)
     test_dataset = VocoderDataset(path, test_ids, train_gta)

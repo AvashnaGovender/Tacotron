@@ -38,7 +38,7 @@ def get_vocoder_datasets(path: Path, batch_size, train_gta):
         dataset = pickle.load(f)
 
     dataset_ids = [x[0] for x in dataset]
-
+    print(dataset_ids)
     #random.seed(1234)
     #random.shuffle(dataset_ids)
 

@@ -52,7 +52,7 @@ def get_vocoder_datasets(path: Path, batch_size, train_gta):
                            collate_fn=collate_vocoder,
                            batch_size=batch_size,
                            num_workers=2,
-                           shuffle=True,
+                           shuffle=False,
                            pin_memory=True)
 
     test_set = DataLoader(test_dataset,

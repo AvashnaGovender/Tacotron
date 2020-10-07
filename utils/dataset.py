@@ -39,8 +39,8 @@ def get_vocoder_datasets(path: Path, batch_size, train_gta):
 
     dataset_ids = [x for x in dataset]
     print(dataset_ids)
-    #random.seed(1234)
-    #random.shuffle(dataset_ids)
+    random.seed(1234)
+    random.shuffle(dataset_ids)
 
     test_ids = dataset_ids[-hp.voc_test_samples:]
     train_ids = dataset_ids[:-hp.voc_test_samples]
@@ -52,7 +52,7 @@ def get_vocoder_datasets(path: Path, batch_size, train_gta):
                            collate_fn=collate_vocoder,
                            batch_size=batch_size,
                            num_workers=2,
-                           shuffle=False,
+                           shuffle=True,
                            pin_memory=True)
 
     test_set = DataLoader(test_dataset,
@@ -149,6 +149,8 @@ class TTSDataset(Dataset):
     def __getitem__(self, index):
         item_id = self.metadata[index]
         x = text_to_sequence(self.text_dict[item_id], hp.tts_cleaner_names)
+        print(x)
+        exit()
         mel = np.load(self.path/'mel'/f'{item_id}.npy')
         mel_len = mel.shape[-1]
         return x, mel, item_id, mel_len

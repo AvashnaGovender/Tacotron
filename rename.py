@@ -7,4 +7,4 @@ for file in os.listdir("4books_batch2"):
 
   new_name = str(new_id)+"_"+info[1]+"_"+info[2]+"_"+info[3]
 
-  print(f'mv {file} {new_name}')
+  print(f'mv 4books_batch2/{file} 4books_batch2_new/{new_name}')

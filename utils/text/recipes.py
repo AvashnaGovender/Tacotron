@@ -13,6 +13,11 @@ def blizzard(path: Union[str, Path], books):
 
     for line in content :
         split = line.split('|')
-        text_dict[split[0]] = split[-1]
+        filename = split[0]
+        book_split = filename.split("-")
+        bookname = book_split[0]+"-"+book_split[1]
+
+        if bookname in books:
+            text_dict[split[0]] = split[-1]
 
     return text_dict

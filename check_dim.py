@@ -26,3 +26,6 @@ with open(mel_inputs, 'rb') as f:
   content = pickle.load(f)
 
 print("Mel input dim:", len(content))
+
+print(text_inputs[0])
+print(mel_inputs[0])

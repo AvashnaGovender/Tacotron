@@ -125,6 +125,10 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
         # Perform 1 epoch
         for i, (x, m, ids, _ ) in enumerate(train_set, 1):
 
+            print(x[0])
+            print(m[0])
+            print(ids[0])
+
             x, m = x.to(device), m.to(device)
 
             # Parallelize model onto GPUS using workaround due to python bug

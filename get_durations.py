@@ -171,8 +171,8 @@ def main_work():
 
 
    hp.configure(args.hp_file)  # Load hparams from file
-   
-   time_step = 50.0
+
+   time_step = 12.5
 
    transcript_file = Path(f'{hp.data_path}/train_dctts.csv')
    outfile = Path(f'{hp.data_path}/train_durations_dctts.csv')
@@ -195,20 +195,22 @@ def main_work():
    for labfile in os.listdir(f'{hp.data_path}/labels/label_state_align/'):
        print(f'Processing {labfile} ... ')
        labfile = Path(labfile)
-       os.makedirs(f'{hp.data_path}/attention_guides_dctts', exist_ok=True)
-       out_guide_file = Path(f'{hp.data_path}/attention_guides_dctts/{labfile.stem}.npy')
+       #os.makedirs(f'{hp.data_path}/attention_guides_dctts', exist_ok=True)
+       #out_guide_file = Path(f'{hp.data_path}/attention_guides_dctts/{labfile.stem}.npy')
+       os.makedirs(f'{hp.data_path}/attention_guides', exist_ok=True)
+       out_guide_file = Path(f'{hp.data_path}/attention_guides/{labfile.stem}.npy')
 
        labfile = Path(os.path.join(f'{hp.data_path}/labels/label_state_align/',labfile))
        (mono, lengths) =   merlin_state_label_to_monophones(labfile)
 
 
        mel_file = labfile.stem
-       mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
-       audio_msec_length = mel_features.shape[0] * time_step
+       #mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
+       #audio_msec_length = mel_features.shape[0] * time_step
 
        # NOTE THE DIMENSIONS -- dctts nframe is in [0] and taco is in [1]
-       #mel_features_12 = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
-       #audio_msec_length_12 = mel_features_12.shape[1] * 12.5
+       mel_features = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
+       audio_msec_length = mel_features.shape[1] * 12.5
 
        resampled_lengths = resample_timings(lengths, 5.0, time_step, total_duration=audio_msec_length)
 

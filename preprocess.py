@@ -48,7 +48,7 @@ def process_wav(path: Path):
     return wav_id, m.shape[-1]
 
 
-wav_files = get_files(path, hp.book_names, extension)
+wav_files = get_files(path, hp.book_names, hp.metadata, extension)
 paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
 
 print(wav_files[0])

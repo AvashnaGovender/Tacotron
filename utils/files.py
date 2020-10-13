@@ -1,9 +1,9 @@
 import os
 
 
-def get_files(path, books, extension='.csv'):
+def get_files(path, books, metadata, extension='.csv'):
     filenames = []
-    filepath = os.path.join(path,"train.csv")
+    filepath = os.path.join(path, metadata)
     with open(filepath, "r") as f:
         content = f.readlines()
 

@@ -174,8 +174,8 @@ def main_work():
 
    time_step = 12.5
 
-   transcript_file = Path(f'{hp.data_path}/train_dctts.csv')
-   outfile = Path(f'{hp.data_path}/train_durations_dctts.csv')
+   transcript_file = Path(f'{hp.data_path}/train.csv')
+   outfile = Path(f'{hp.data_path}/train_durations.csv')
    transcript = read_transcript(transcript_file)
 
    # check if label files exist

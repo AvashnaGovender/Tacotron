@@ -23,9 +23,9 @@ def create_attention_guides(fpath):
     with open(f'{fpath}/dataset.pkl', 'rb') as f:
           dataset = pickle.load(f)
 
-    for (item_id, len) in dataset:
+    for (item_id, l) in dataset:
         dataset_ids += [item_id]
-        mel_lengths += [len]
+        mel_lengths += [l]
 
     with open(f'{fpath}/text_dict.pkl', 'rb') as f:
           text_dict = pickle.load(f)
@@ -33,7 +33,7 @@ def create_attention_guides(fpath):
     for item_id in dataset_ids:
       x = text_to_sequence(text_dict[item_id], ['blizz_cleaners'])
       print(x)
-      print(len(x))
+      print(x.shape)
       text_lengths.append(len(x))
 
     for id in enumerate(datatset_ids):

@@ -37,7 +37,7 @@ def create_attention_guides(fpath):
 
     for i,id in enumerate(dataset_ids):
 
-      attfile = os.path.join(fpath, 'diagonal_attention_guides', id , '.npy')
+      attfile = os.path.join(fpath, 'diagonal_attention_guides', id+'.npy')
       att = get_attention_guide(text_lengths[i], mel_lengths[i], g=0.2)
       np.save(attfile, att)
 

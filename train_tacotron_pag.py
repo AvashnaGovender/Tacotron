@@ -136,7 +136,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
 
 
             #print(att_guides.shape)
-
+            orig_attention = attention
             n = int(len(att_guides[0])/r)
             #print("n", n)
             #reduce guide by r factor
@@ -206,7 +206,7 @@ def tts_train_loop(paths: Paths, model: Tacotron, optimizer, train_set, lr, trai
 
             if attn_example in ids:
                 idx = ids.index(attn_example)
-                save_attention(np_now(attention[idx][:, :160]), paths.tts_attention/f'{step}')
+                save_attention(np_now(orig_attention[idx][:, :160]), paths.tts_attention/f'{step}')
                 save_spectrogram(np_now(m2_hat[idx]), paths.tts_mel_plot/f'{step}', 600)
 
             msg = f'| Epoch: {e}/{epochs} ({i}/{total_iters}) | Loss: {avg_loss:#.4} | {speed:#.2} steps/s | Step: {k}k | '

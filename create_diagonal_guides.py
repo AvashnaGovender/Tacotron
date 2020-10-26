@@ -1,5 +1,5 @@
 #Plot attention matrix for to be "nearly diagonal"
-import numpy
+import numpy as np
 from utils.text import text_to_sequence
 import os, argparse
 from utils import hparams as hp

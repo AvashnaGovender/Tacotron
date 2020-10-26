@@ -33,8 +33,8 @@ def create_attention_guides(fpath):
     for item_id in dataset_ids:
       x = text_to_sequence(text_dict[item_id], ['blizz_cleaners'])
       print(x)
-      print(x.shape)
-      text_lengths.append(len(x))
+
+      text_lengths += [len(x)]
 
     for id in enumerate(datatset_ids):
 

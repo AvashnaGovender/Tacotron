@@ -32,11 +32,10 @@ def create_attention_guides(fpath):
 
     for item_id in dataset_ids:
       x = text_to_sequence(text_dict[item_id], ['blizz_cleaners'])
-      print(x)
 
       text_lengths += [len(x)]
 
-    for id in enumerate(datatset_ids):
+    for id in enumerate(dataset_ids):
 
       attfile = os.path.join(fpath, "diagonal_attention_guides", dataset_ids[id] , '.npy')
       att = get_attention_guide(text_lengths[id], mel_lengths[id], g=0.2)

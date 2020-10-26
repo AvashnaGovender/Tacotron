@@ -3,6 +3,7 @@ import numpy
 from utils.text import text_to_sequence
 import os, argparse
 from utils import hparams as hp
+import pickle
 
 
 def get_attention_guide(xdim, ydim, g=0.2):

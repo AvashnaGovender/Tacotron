@@ -31,7 +31,7 @@ def create_attention_guides(fpath):
       text_lengths = [len(x)]
 
     for id in enumerate(datatset_ids):
-    
+
       attfile = os.path.join(fpath, "diagonal_attention_guides", dataset_ids[id] , '.npy')
       att = get_attention_guide(text_lengths[id], mel_lengths[id], g=0.2)
       np.save(attfile, att)
@@ -39,9 +39,9 @@ def create_attention_guides(fpath):
 
 if __name__=="__main__":
 
-     parser = argparse.ArgumentParser(description='Create diagonal attention guides')
-     parser.add_argument('--hp_file', metavar='FILE', default='hparams.py', help='The file to use for the hyperparameters')
-     args = parser.parse_args()
+    parser = argparse.ArgumentParser(description='Create diagonal attention guides')
+    parser.add_argument('--hp_file', metavar='FILE', default='hparams.py', help='The file to use for the hyperparameters')
+    args = parser.parse_args()
 
 
     hp.configure(args.hp_file)  # Load hparams from file

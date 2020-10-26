@@ -16,14 +16,14 @@ def get_attention_guide(xdim, ydim, g=0.2):
 
 def create_attention_guides(fpath):
 
-    with open(fpath/'dataset.pkl', 'rb') as f:
+    with open(f'{fpath}/dataset.pkl', 'rb') as f:
           dataset = pickle.load(f)
 
     for (item_id, len) in dataset:
         dataset_ids += [item_id]
         mel_lengths += [len]
 
-    with open(fpath/'text_dict.pkl', 'rb') as f:
+    with open(f'{fpath}/text_dict.pkl', 'rb') as f:
           text_dict = pickle.load(f)
 
     for item_id in dataset_ids:

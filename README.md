@@ -1,6 +1,16 @@
-# WaveRNN
+# Tacotron + WaveRNN
 
-##### (Update: Vanilla Tacotron One TTS system just implemented - more coming soon!)
+
+A modified version of Fatchord/WaveRNN repository, which implements a variant of the system described in Tacotron: Towards End-to-End Speech Synthesis. 
+
+# Additions to original repo:
+
+* Recipes for training Blizzard 2013 dataset (4 books: JE, EM, LCL & FFM)
+* Generateding labels using HTK forced alignment
+* Recipe to train model with pre-aligned guides as in [Pre-Alignment Guided Attention for Improving Training Efficiency and Model Stability
+in End-to-End Speech Synthesis](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8703406)
+* Recipe to train model with diagonal guides as in [Efficiently Trainable Text-to-Speech System Based on Deep Convolutional Networks with Guided Attention](https://arxiv.org/abs/1710.08969)
+
 
 ![Tacotron with WaveRNN diagrams](assets/tacotron_wavernn.png)
 
@@ -33,24 +43,23 @@ You can also use that script to generate custom tts sentences and/or use '-u' to
 
 
 ### Training your own Models
-![Attenion and Mel Training GIF](assets/training_viz.gif)
 
-Download the [LJSpeech](https://keithito.com/LJ-Speech-Dataset/) Dataset.
+Download the [Blizzard Challenge 2013](https://keithito.com/LJ-Speech-Dataset/) Dataset.
 
 Edit **hparams.py**, point **wav_path** to your dataset and run:
 
-> python preprocess.py
+> python preprocess.py --hp_file hp_JE.py
 
-or use preprocess.py --path to point directly to the dataset
-___
+This extract mels from wavs and dumps your linguistic features in a pickle file in the location specified by **datapath** in hparams.py.
 
-Here's my recommendation on what order to run things:
 
-1 - Train Tacotron with:
+To train the model:
 
-> python train_tacotron.py
+1 - Train Tacotron using:
 
-2 - You can leave that finish training or at any point you can use:
+> python train_tacotron.py --hp_file hp_JE.py
+
+2 - You can leave that to finish training or at any point you can use:
 
 > python train_tacotron.py --force_gta
 
@@ -80,12 +89,15 @@ And finally, you can always use --help on any of those scripts to see what optio
 
 # Pretrained Models
 
-Currently there are two pretrained models available in the /pretrained/ folder':
+Currently there are 2 pretrained models available in the /pretrained/ folder':
 
-Both are trained on LJSpeech
+Both are trained on Blizzard 2013:
 
-* WaveRNN (Mixture of Logistics output) trained to 800k steps
-* Tacotron trained to 180k steps
+* Tacotron trained using 1 book (JE) to 200k steps
+* Tacotron trained using 4 books (that have wavs that have been carefully selected to control variability in speech rate) to 200k steps
+
+* WaveRNN (Mixture of Logistics output) using LJSpeech trained to 800k steps (taken from original Fatchord/WaveRNN repo)
+
 
 ____
 
@@ -99,4 +111,6 @@ ____
 
 * [https://github.com/keithito/tacotron](https://github.com/keithito/tacotron)
 * [https://github.com/r9y9/wavenet_vocoder](https://github.com/r9y9/wavenet_vocoder)
+* [https://github.com/fatchord/WaveRNN](https://github.com/fatchord/WaveRNN)
 * Special thanks to github users [G-Wang](https://github.com/G-Wang), [geneing](https://github.com/geneing) & [erogol](https://github.com/erogol)
+

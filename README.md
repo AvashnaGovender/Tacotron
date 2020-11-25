@@ -23,7 +23,9 @@ Ensure you have:
 
 Then install the rest with pip:
 > conda create -n taco python=3.6 anaconda
+
 > conda install pytorch=1.0.1 torchvision cudatoolkit=8.0 -c pytorch
+
 > pip install -r requirements.txt
 
 # How to Use

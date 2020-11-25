@@ -105,12 +105,11 @@ ____
 * [Efficient Neural Audio Synthesis](https://arxiv.org/abs/1802.08435v1)
 * [Tacotron: Towards End-to-End Speech Synthesis](https://arxiv.org/abs/1703.10135)
 * [Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions](https://arxiv.org/abs/1712.05884)
+* [Pre-Alignment Guided Attention for Improving Training Efficiency and Model Stability
+in End-to-End Speech Synthesis](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8703406)
 
 ### Acknowlegements
 
 * [https://github.com/fatchord/WaveRNN](https://github.com/fatchord/WaveRNN)
-* [https://github.com/keithito/tacotron](https://github.com/keithito/tacotron)
-* [https://github.com/r9y9/wavenet_vocoder](https://github.com/r9y9/wavenet_vocoder)
-* Special thanks to github users [G-Wang](https://github.com/G-Wang), [geneing](https://github.com/geneing) & [erogol](https://github.com/erogol)
 * Special thanks to the CSTR at the University of Edinburgh who I was working for at the time that this code is written
 

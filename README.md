@@ -6,10 +6,8 @@ A modified version of [Fatchord/WaveRNN](https://github.com/fatchord/WaveRNN) re
 # Additions to original repo:
 
 * Recipes for training Blizzard 2013 dataset (4 books: JE, EM, LCL & FFM)
-* Generateding labels using HTK forced alignment
 * Recipe to train model with pre-aligned guides as in [Pre-Alignment Guided Attention for Improving Training Efficiency and Model Stability
 in End-to-End Speech Synthesis](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8703406)
-* Recipe to train model with diagonal guides as in [Efficiently Trainable Text-to-Speech System Based on Deep Convolutional Networks with Guided Attention](https://arxiv.org/abs/1710.08969)
 
 
 ![Tacotron with WaveRNN diagrams](assets/tacotron_wavernn.png)

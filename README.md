@@ -50,7 +50,7 @@ Edit **hparams.py**, point **wav_path** to your dataset and run:
 
 > python preprocess.py --hp_file hp_JE.py
 
-This extract mels from wavs and dumps your linguistic features in a pickle file in the location specified by **datapath** in hparams.py.
+This extracts mels from wavs and dumps your linguistic features in a pickle file in the location specified by **datapath** in hparams.py.
 
 
 To train the model:

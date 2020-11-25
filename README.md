@@ -54,17 +54,17 @@ audio || text | phoneme sequence
 
 Edit the following parameters accordingly in **hparams.py**:
 
-wav_path = 'data/wavs_train/'
+          wav_path = 'data/wavs_train/'
 
-data_path = 'data/CB_JE'
+          data_path = 'data/CB_JE'
 
-book_names = ['CB-JE']
+          book_names = ['CB-JE']
 
-voc_model_id = 'blizzard_vocoder'
+          voc_model_id = 'blizzard_vocoder'
 
-tts_model_id = 'blizzard_baseline_JE'
+          tts_model_id = 'blizzard_baseline_JE'
 
-metadata = "train.csv"
+          metadata = "train.csv"
 
 
 2 - Next run the following to perform feature extraction:

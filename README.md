@@ -89,13 +89,12 @@ And finally, you can always use --help on any of those scripts to see what optio
 
 # Pretrained Models
 
-Currently there are 2 pretrained models available in the /pretrained/ folder':
+Currently there are 3 pretrained models available in the /pretrained/ folder':
 
 Both are trained on Blizzard 2013:
 
 * Tacotron trained using 1 book (JE) to 200k steps
 * Tacotron trained using 4 books (that have wavs that have been carefully selected to control variability in speech rate) to 200k steps
-
 * WaveRNN (Mixture of Logistics output) using LJSpeech trained to 800k steps (taken from original Fatchord/WaveRNN repo)
 
 
@@ -109,8 +108,8 @@ ____
 
 ### Acknowlegements
 
+* [https://github.com/fatchord/WaveRNN](https://github.com/fatchord/WaveRNN)
 * [https://github.com/keithito/tacotron](https://github.com/keithito/tacotron)
 * [https://github.com/r9y9/wavenet_vocoder](https://github.com/r9y9/wavenet_vocoder)
-* [https://github.com/fatchord/WaveRNN](https://github.com/fatchord/WaveRNN)
 * Special thanks to github users [G-Wang](https://github.com/G-Wang), [geneing](https://github.com/geneing) & [erogol](https://github.com/erogol)
 

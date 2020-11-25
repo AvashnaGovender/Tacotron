@@ -16,11 +16,11 @@ zip_ref = zipfile.ZipFile('pretrained/ljspeech.wavernn.mol.800k.zip', 'r')
 zip_ref.extractall('quick_start/voc_weights/')
 zip_ref.close()
 
-zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.JE.200k.zip', 'r')
+zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.JE.200k.pyt.zip', 'r')
 zip_ref.extractall('quick_start/tts_weights/')
 zip_ref.close()
 
-#zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.SR.200k.zip', 'r')
+#zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.SR.200k.pyt.zip', 'r')
 #zip_ref.extractall('quick_start/tts_weights/')
 #zip_ref.close()
 

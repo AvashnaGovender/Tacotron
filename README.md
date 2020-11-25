@@ -50,7 +50,7 @@ audio || text | phoneme sequence
 >CB-JE-01-59||but Eliza just put her head in at the door, and said at once "She is in the window-seat, to be sure, Jack."|<_START_> b ah t <> ih l ay z ax <> jh ah s t <> p uh t <> hh er <> hh eh d <> ih n <> ae t <> dh ax <> d ao r <,> ae n d <> s eh d <> ae t <> w ah n s <> sh iy <> ih z <> ih n <> dh ax <> w ih n d ow <> s iy t <,> t ax <> b iy <> sh uh r <,> jh ae k <.> <_END_>
 
 
-# Edit hparams.py or create new hparams eg., hp_JE.py
+1 - Edit hparams.py or create new hparams eg., hp_JE.py
 
 Edit the following parameters accordingly in **hparams.py**:
 
@@ -67,7 +67,7 @@ tts_model_id = 'blizzard_baseline_JE'
 metadata = "train.csv"
 
 
-Next run the following to perform feature extraction:
+2 - Next run the following to perform feature extraction:
 
 > python preprocess.py --hp_file hp_JE.py
 
@@ -76,11 +76,11 @@ This extracts mels from wavs and dumps your linguistic features in a pickle file
 
 To train the model:
 
-1 - Train Tacotron using:
+3 - Train Tacotron using:
 
 > python train_tacotron.py --hp_file hp_JE.py
 
-2 - To generate from the model:
+4 - To generate from the model:
 
 Edit the autogen.sh script:
 

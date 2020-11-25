@@ -45,7 +45,7 @@ Download the [Blizzard Challenge 2013](http://www.cstr.ed.ac.uk/projects/blizzar
 
 In the same wav directory, make sure you have the corresponding transcription/metadata file which looks like this:
 
-audio || text | phoneme sequence |
+audio || text | phoneme sequence 
 
 >CB-JE-01-59||but Eliza just put her head in at the door, and said at once "She is in the window-seat, to be sure, Jack."|<_START_> b ah t <> ih l ay z ax <> jh ah s t <> p uh t <> hh er <> hh eh d <> ih n <> ae t <> dh ax <> d ao r <,> ae n d <> s eh d <> ae t <> w ah n s <> sh iy <> ih z <> ih n <> dh ax <> w ih n d ow <> s iy t <,> t ax <> b iy <> sh uh r <,> jh ae k <.> <_END_>
 
@@ -55,10 +55,15 @@ audio || text | phoneme sequence |
 Edit the following parameters accordingly in **hparams.py**:
 
 wav_path = 'data/wavs_train/'
+
 data_path = 'data/CB_JE'
+
 book_names = ['CB-JE']
+
 voc_model_id = 'blizzard_vocoder'
+
 tts_model_id = 'blizzard_baseline_JE'
+
 metadata = "train.csv"
 
 
@@ -75,7 +80,7 @@ To train the model:
 
 > python train_tacotron.py --hp_file hp_JE.py
 
-To generate from the model:
+2 - To generate from the model:
 
 Edit the autogen.sh script:
 
@@ -109,4 +114,5 @@ ____
 * [https://github.com/keithito/tacotron](https://github.com/keithito/tacotron)
 * [https://github.com/r9y9/wavenet_vocoder](https://github.com/r9y9/wavenet_vocoder)
 * Special thanks to github users [G-Wang](https://github.com/G-Wang), [geneing](https://github.com/geneing) & [erogol](https://github.com/erogol)
+* Special thanks to the CSTR at the University of Edinburgh who I was working for at the time that this code is written
 

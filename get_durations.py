@@ -144,23 +144,9 @@ def durations_to_attention_matrix(durations):
     assert A.sum(axis=0).all() == durations.all()
     return A
 
-def get_attention_guide(xdim, ydim, g=0.2):
-    '''Guided attention. DCTTS (following page 3 in paper)'''
-    W = np.zeros((xdim, ydim), dtype=np.float32)
-    for n_pos in range(xdim):
-        for t_pos in range(ydim):
-            W[n_pos, t_pos] = 1 - np.exp(-(t_pos / float(ydim) - n_pos / float(xdim)) ** 2 / (2 * g * g))
-    return W
-
-
-
-
 def save_guided_attention(matrix, outfile):
     np.save(outfile, matrix, allow_pickle=False)
     print('Created attention guide %s' %(outfile))
-
-
-
 
 def main_work():
 

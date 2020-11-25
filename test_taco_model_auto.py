@@ -8,12 +8,9 @@ from utils.text import text_to_sequence
 from utils.display import save_attention, simple_table
 import zipfile, os
 
+# Test Example:
+# python test_taco_model_auto.py --checkpoint blizzard_baseline_JE.tacotron/final_taco_300K.pyt --model_name JE_fixed
 
-#os.makedirs('quick_start/voc_weights/', exist_ok=True)
-
-#zip_ref = zipfile.ZipFile('pretrained/ljspeech.wavernn.mol.800k.zip', 'r')
-#zip_ref.extractall('quick_start/voc_weights/')
-#zip_ref.close()
 
 if __name__ == "__main__":
 
@@ -108,11 +105,10 @@ if __name__ == "__main__":
         _, m, attention = tts_model.generate(x)
 
         if input_text:
-            save_path = f'quick_start/__input_{input_text[:10]}_{tts_k}k.wav'
+            save_path = f'gen_output/__input_{input_text[:10]}_{tts_k}k.wav'
         else:
-            save_path = f'quick_start/{i}_{tts_k}k_{model_name}.wav'
+            save_path = f'gen_output/{i}_{tts_k}k_{model_name}.wav'
 
-        # save_attention(attention, save_path)
 
         m = torch.tensor(m).unsqueeze(0)
         m = (m + 4) / 8

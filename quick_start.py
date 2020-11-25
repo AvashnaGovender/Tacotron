@@ -16,10 +16,13 @@ zip_ref = zipfile.ZipFile('pretrained/ljspeech.wavernn.mol.800k.zip', 'r')
 zip_ref.extractall('quick_start/voc_weights/')
 zip_ref.close()
 
-zip_ref = zipfile.ZipFile('pretrained/ljspeech.tacotron.r2.180k.zip', 'r')
+zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.JE.200k.zip', 'r')
 zip_ref.extractall('quick_start/tts_weights/')
 zip_ref.close()
 
+#zip_ref = zipfile.ZipFile('pretrained/blizz.tacotron.SR.200k.zip', 'r')
+#zip_ref.extractall('quick_start/tts_weights/')
+#zip_ref.close()
 
 if __name__ == "__main__":
 
@@ -88,7 +91,7 @@ if __name__ == "__main__":
     if input_text:
         inputs = [text_to_sequence(input_text.strip(), hp.tts_cleaner_names)]
     else:
-        with open('sentences.txt') as f:
+        with open('phonemes.txt') as f:
             inputs = [text_to_sequence(l.strip(), hp.tts_cleaner_names) for l in f]
 
     voc_k = voc_model.get_step() // 1000

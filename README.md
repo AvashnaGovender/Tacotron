@@ -21,7 +21,7 @@ Ensure you have:
 * Python >= 3.6
 * [Pytorch 1 with CUDA](https://pytorch.org/)
 
-Then install the rest with pip:
+Install by creating a virtual environment using the following commands and install the the rest with pip:
 > conda create -n taco python=3.6 anaconda
 
 > conda install pytorch=1.0.1 torchvision cudatoolkit=8.0 -c pytorch

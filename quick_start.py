@@ -86,7 +86,7 @@ if __name__ == "__main__":
                          stop_threshold=hp.tts_stop_threshold).to(device)
 
 
-    tts_model.load('quick_start/tts_weights/latest_weights.pyt')
+    tts_model.load('quick_start/tts_weights/blizz.tacotron.JE.200k.pyt')
 
     if input_text:
         inputs = [text_to_sequence(input_text.strip(), hp.tts_cleaner_names)]

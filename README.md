@@ -86,6 +86,9 @@ Edit the autogen.sh script:
 
 This will generate the wavs using the test.txt phoneme sequences and save them in model_output.
 
+# Recipes
+
+[Recipe](PAG_recipe.md) to train model with pre-aligned guides 
 
 # Pretrained Models
 

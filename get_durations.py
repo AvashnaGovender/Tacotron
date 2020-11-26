@@ -146,19 +146,26 @@ def durations_to_attention_matrix(durations):
 
 def save_guided_attention(matrix, outfile):
     np.save(outfile, matrix, allow_pickle=False)
-    print('Created attention guide %s' %(outfile))
+    print('Created attention guide %s' %(outfile))§
 
 def main_work():
 
 
    parser = argparse.ArgumentParser(description='Get durations for Tacotron')
    parser.add_argument('--hp_file', metavar='FILE', default='hparams.py', help='The file to use for the hyperparameters')
+   parser.add_argument('--model_name', default='taco', help='taco or dctts')
+
    args = parser.parse_args()
 
 
    hp.configure(args.hp_file)  # Load hparams from file
+   model = args.model_name
 
-   time_step = 12.5
+   if model == "dctts":
+       time_step = 50
+   else:
+       time_step = 12.5
+
 
    transcript_file = Path(f'{hp.data_path}/{hp.metadata}')
    outfile = Path(f'{hp.data_path}/train_durations.csv')
@@ -191,12 +198,14 @@ def main_work():
 
 
        mel_file = labfile.stem
-       #mel_features = np.load(f'{hp.data_path}/mel_dctts/{mel_file}.npy')
-       #audio_msec_length = mel_features.shape[0] * time_step
+      
 
        # NOTE THE DIMENSIONS -- dctts nframe is in [0] and taco is in [1]
        mel_features = np.load(f'{hp.data_path}/mel/{mel_file}.npy')
-       audio_msec_length = mel_features.shape[1] * 12.5
+       if model == "dctts":
+           audio_msec_length = mel_features.shape[0] * time_step
+       else:
+           audio_msec_length = mel_features.shape[1] * time_step
 
        resampled_lengths = resample_timings(lengths, 5.0, time_step, total_duration=audio_msec_length)
 

@@ -10,7 +10,7 @@ A modified version of [Fatchord/WaveRNN](https://github.com/fatchord/WaveRNN) re
 in End-to-End Speech Synthesis](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8703406)
 
 
-![Tacotron with WaveRNN diagrams](assets/tacotron_wavernn.png)
+![Tacotron with WaveRNN diagrams](assets/taco.002.jpeg)
 
 # Installation
 

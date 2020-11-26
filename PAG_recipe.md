@@ -17,15 +17,18 @@ To test HTK and Festival is installed and working, the following should run with
 
 > festival
 
-**Step 2 - Get data **
+**Step 2 - Get data**
 
 > mkdir data
+
 > cd data
+
 > wget **link to data**
+
 > cp -f train.csv {data_path}
 
 
-**Step 3 - Edit hparams.py **
+**Step 3 - Edit hparams.py**
 
     wav_path = 'data/wavs_train/'
     data_path = 'data/CB_JE'
@@ -44,7 +47,7 @@ To test HTK and Festival is installed and working, the following should run with
 
 This will output all the necessary files for forced alignment in {data_path}/labels
 
-**Step 5b - Run alignment on different model (optional)
+**Step 5b - Run alignment on different model (optional)**
 
 Since we only using 1 book in this tutorial, it will be better to train the aligner with all the data. In this case, you need to run Step 4 with all the data and then run:
 
@@ -52,13 +55,13 @@ Since we only using 1 book in this tutorial, it will be better to train the alig
 
 The output label files will be in {data_path}/labels/label_state_align
 
-**Step 6 - Get durations and create guides **
+**Step 6 - Get durations and create guides**
 
 > python get_durations.py --hp_file hp_JE.py
 
 The output guides will be saved in {hp.data_path}/attention_guides
 
-**Step 7 - Train PAG **
+**Step 7 - Train PAG**
 
 > python train_pag.py --hp_file hp_JE.py
 

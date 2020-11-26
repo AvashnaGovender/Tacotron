@@ -93,8 +93,8 @@ Currently there are 3 pretrained models available in the /pretrained/ folder':
 
 Both are trained on Blizzard 2013:
 
-* Tacotron trained using 1 book (JE) to 200k steps
-* Tacotron trained using 4 books (that have wavs that have been carefully selected to control variability in speech rate) to 200k steps
+* Tacotron trained using 1 book (JE) to 300k steps
+* Tacotron trained using 4 books (that have wavs that have been carefully selected to control variability in speech rate) to 300k steps
 * WaveRNN (Mixture of Logistics output) using LJSpeech trained to 800k steps (taken from original Fatchord/WaveRNN repo)
 
 

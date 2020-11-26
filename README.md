@@ -5,7 +5,7 @@ A modified version of [Fatchord/WaveRNN](https://github.com/fatchord/WaveRNN) re
 
 # Additions to original repo:
 
-* Recipes for training Blizzard 2013 dataset (4 books: JE, EM, LCL & FFM)
+* Recipes for training Blizzard 2013 dataset (1, 2 or 4 books: JE, EM, LCL & FFM)
 * Recipe to train model with pre-aligned guides as in [Pre-Alignment Guided Attention for Improving Training Efficiency and Model Stability
 in End-to-End Speech Synthesis](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8703406)
 

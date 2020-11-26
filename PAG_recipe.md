@@ -49,7 +49,7 @@ This will output all the necessary files for forced alignment in {data_path}/lab
 
 **Step 5b - Run alignment on different model (optional)**
 
-Since we only using 1 book in this tutorial, it will be better to train the aligner with all the data. In this case, you need to run Step 4 with all the data and then run:
+Since we only using 1 book in this recipe, it will be better to train the aligner with all the data. In this case, you need to run Step 5a with all the data and then run:
 
 > python scripts/align_data.py --lab_dir {labels folder of JE book} --model_dir {labels folder of all books}
 

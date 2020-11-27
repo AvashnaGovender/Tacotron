@@ -39,7 +39,7 @@ This will generate everything in the default phonemes.txt file and synthesize wa
 
 ### Training your own Models
 
-Download the [Blizzard Challenge 2013](http://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/) Dataset.
+Download the [Blizzard Challenge 2013 wavs](http://data.cstr.ed.ac.uk/blizzard2013/lessac/BC2013_segmented_v1_txt_selection.zip) and [Blizzard Challenge 2013 txt](http://data.cstr.ed.ac.uk/blizzard2013/lessac/BC2013_segmented_v1_wav_selection.zip).
 
 In the same wav directory, make sure you have the corresponding transcription/metadata file which looks like this:
 
